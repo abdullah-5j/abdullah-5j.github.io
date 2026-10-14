@@ -16,6 +16,7 @@ from urllib.parse import quote
 ROOT = Path(__file__).resolve().parent
 POST_DIR = ROOT / 'posts'
 SITE = 'https://abdullah-5j.github.io'
+ASSET_VERSION = 'verox-20261015'
 SECTIONS = {
     'hackthebox': 'Hack The Box',
     'research': 'Research',
@@ -95,7 +96,7 @@ def sidebar(active):
     ss.append(f'<span id="theme-control-container"><button id="theme-toggle" class="theme-control" aria-label="Choose appearance" aria-expanded="false" title="Appearance">{svg("moon")}</button><span class="theme-menu" id="theme-menu" role="menu"><button type="button" data-theme-choice="light">☀ &nbsp; Light</button><button type="button" data-theme-choice="dark">☾ &nbsp; Dark</button><button type="button" data-theme-choice="system">▣ &nbsp; System</button></span></span>')
     nav=''.join(nav_item(*x[:3],active=(x[3]==active)) for x in links)
     return f'''<aside class="sidebar" id="sidebar">
-    <div class="identity"><a href="/writeups/" aria-label="verox Writeups"><img class="portrait" src="/assets/avatar.jpg" alt="verox Hacker Pepe avatar"/></a><a class="brand" href="/writeups/">verox</a><p class="subtitle">Writeups &amp; Thoughts</p></div>
+    <div class="identity"><a href="/writeups/" aria-label="verox Writeups"><img class="portrait" src="/assets/avatar.jpg?v={ASSET_VERSION}" alt="verox Hacker Pepe avatar"/></a><a class="brand" href="/writeups/">verox</a><p class="subtitle">Writeups &amp; Thoughts</p></div>
     <nav class="side-nav" aria-label="Primary">{nav}</nav>
     <div class="social-wrap"><div class="social-icons">{''.join(ss)}</div></div><div class="copyright">© 2026 verox</div>
     </aside>'''
@@ -117,13 +118,13 @@ def wrapper(title, active, current, body, posts, description='Cybersecurity writ
     return f'''<!doctype html><html lang="en" data-theme="dark"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="description" content="{h(description)}"/><meta name="theme-color" content="#1b1b1e"/><meta property="og:site_name" content="verox"/>
     <meta property="og:title" content="{h(title)} | verox"/><meta property="og:description" content="{h(description)}"/>
-    <title>{h(title)} | verox</title><link rel="icon" href="/assets/avatar.jpg"/><link rel="stylesheet" href="/assets/style.css"/>
+    <title>{h(title)} | verox</title><link rel="icon" href="/assets/avatar.jpg?v={ASSET_VERSION}"/><link rel="stylesheet" href="/assets/style.css?v={ASSET_VERSION}"/>
     <script>try{{const t=localStorage.getItem('verox-theme')||'dark';document.documentElement.dataset.theme=t==='system'?(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'):t}}catch(e){{}}</script></head>
     <body>{sidebar(active)}<div class="shell"><header class="topbar"><div class="crumbs"><button class="mobile-trigger" id="mobile-trigger" aria-label="Toggle menu">{svg('menu')}</button><a href="/writeups/">verox</a><span class="crumb-sep">›</span><span>{h(current)}</span></div><button type="button" class="search-pill" id="open-search" aria-label="Search articles">{svg('search')}Search...</button></header>
     <div class="layout"><main class="main-content" id="main">{body}</main>{rail(posts)}</div>
     <footer class="footer"><span>© 2026 <a href="/writeups/">verox</a>. Some rights reserved.</span><span>Powered by GitHub Pages · Inspired by Jekyll Chirpy</span></footer></div>
     <div class="search-backdrop" id="search-backdrop" role="dialog" aria-modal="true" aria-label="Search writeups"><div class="search-dialog"><div class="search-input-row">{svg('search')}<input type="search" autocomplete="off" id="search-input" aria-label="Search posts" placeholder="Search writeups and thoughts..."/><button id="close-search" class="close-search" type="button" aria-label="Close search">Esc</button></div><div class="search-results" id="search-results"></div></div></div>
-    <script src="/assets/app.js" defer></script></body></html>'''
+    <script src="/assets/app.js?v={ASSET_VERSION}" defer></script></body></html>'''
 
 
 def heading(title, subtitle='', icon=None):
