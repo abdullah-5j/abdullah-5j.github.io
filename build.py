@@ -16,7 +16,7 @@ from urllib.parse import quote
 ROOT = Path(__file__).resolve().parent
 POST_DIR = ROOT / 'posts'
 SITE = 'https://abdullah-5j.github.io'
-ASSET_VERSION = 'verox-20261015'
+ASSET_VERSION = 'verox-20261015-font-footer'
 SECTIONS = {
     'hackthebox': 'Hack The Box',
     'research': 'Research',
@@ -122,7 +122,7 @@ def wrapper(title, active, current, body, posts, description='Cybersecurity writ
     <script>try{{const t=localStorage.getItem('verox-theme')||'dark';document.documentElement.dataset.theme=t==='system'?(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'):t}}catch(e){{}}</script></head>
     <body>{sidebar(active)}<div class="shell"><header class="topbar"><div class="crumbs"><button class="mobile-trigger" id="mobile-trigger" aria-label="Toggle menu">{svg('menu')}</button><a href="/writeups/">verox</a><span class="crumb-sep">›</span><span>{h(current)}</span></div><button type="button" class="search-pill" id="open-search" aria-label="Search articles">{svg('search')}Search...</button></header>
     <div class="layout"><main class="main-content" id="main">{body}</main>{rail(posts)}</div>
-    <footer class="footer"><span>© 2026 <a href="/writeups/">verox</a>. Some rights reserved.</span><span>Powered by GitHub Pages · Inspired by Jekyll Chirpy</span></footer></div>
+    <footer class="footer"><span>© 2026 <a href="/writeups/">verox</a>. Some rights reserved.</span><span>Design inspired by <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener noreferrer">Chirpy</a>.</span></footer></div>
     <div class="search-backdrop" id="search-backdrop" role="dialog" aria-modal="true" aria-label="Search writeups"><div class="search-dialog"><div class="search-input-row">{svg('search')}<input type="search" autocomplete="off" id="search-input" aria-label="Search posts" placeholder="Search writeups and thoughts..."/><button id="close-search" class="close-search" type="button" aria-label="Close search">Esc</button></div><div class="search-results" id="search-results"></div></div></div>
     <script src="/assets/app.js?v={ASSET_VERSION}" defer></script></body></html>'''
 
