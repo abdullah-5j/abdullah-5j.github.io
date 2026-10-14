@@ -1,1 +1,31 @@
-(function(){let theme=localStorage.getItem('theme')||'dark';document.documentElement.dataset.theme=theme;let b=document.getElementById('themeToggle');if(b)b.addEventListener('click',()=>{theme=theme==='dark'?'light':'dark';document.documentElement.dataset.theme=theme;localStorage.setItem('theme',theme)});let menu=document.getElementById('mobileMenu'),bar=document.getElementById('sidebar'),overlay=document.getElementById('overlay');function toggle(){bar.classList.toggle('open');overlay.classList.toggle('open')}if(menu)menu.addEventListener('click',toggle);if(overlay)overlay.addEventListener('click',toggle);let input=document.getElementById('searchInput');if(input){let cards=[...document.querySelectorAll('[data-search]')],empty=document.getElementById('noResults');function filter(){let q=input.value.toLowerCase().trim(),count=0;for(let card of cards){let show=card.dataset.search.toLowerCase().includes(q);card.style.display=show?'':'none';if(show)count++}empty.hidden=count!==0}input.addEventListener('input',filter);filter();}})();
+(() => {
+  const root = document.documentElement;
+  const stored = (()=>{try{return localStorage.getItem('verox-theme')||'dark'}catch{return 'dark'}})();
+  function applyTheme(value){root.dataset.theme = value === 'system' ? (matchMedia('(prefers-color-scheme: light)').matches?'light':'dark') : value;}
+  applyTheme(stored);
+  const toggle = document.getElementById('theme-toggle');
+  const menu = document.getElementById('theme-menu');
+  toggle?.addEventListener('click',()=>{const isOpen=menu?.classList.toggle('open');toggle.setAttribute('aria-expanded', String(!!isOpen));});
+  menu?.querySelectorAll('[data-theme-choice]').forEach(btn=>btn.addEventListener('click',()=>{
+    const value=btn.dataset.themeChoice;try{localStorage.setItem('verox-theme',value)}catch{}applyTheme(value);menu.classList.remove('open');toggle.setAttribute('aria-expanded','false');
+  }));
+  if (window.matchMedia) {matchMedia('(prefers-color-scheme: light)').addEventListener?.('change',()=>{try{if(localStorage.getItem('verox-theme')==='system')applyTheme('system')}catch{}})}
+  document.getElementById('discord-copy')?.addEventListener('click', async e=>{try{await navigator.clipboard.writeText('notabdu11ah');e.currentTarget.title='Copied: notabdu11ah';}catch{prompt('My Discord username:', 'notabdu11ah');}});
+  const sidebar = document.getElementById('sidebar');
+  document.getElementById('mobile-trigger')?.addEventListener('click',()=>sidebar?.classList.toggle('show'));
+  document.addEventListener('click',(event)=>{if(sidebar?.classList.contains('show')&&!sidebar.contains(event.target)&&!event.target.closest('#mobile-trigger'))sidebar.classList.remove('show');if(menu?.classList.contains('open')&&!event.target.closest('#theme-control-container'))menu.classList.remove('open');});
+  const overlay = document.getElementById('search-backdrop');
+  const input = document.getElementById('search-input');
+  const results = document.getElementById('search-results');
+  let items = null;
+  const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  async function loadPosts(){if(items!==null)return items;try{const r=await fetch('/site.json');items=r.ok?await r.json():[];}catch{items=[]}return items;}
+  async function search(q){if(!results)return;const all=await loadPosts();const text=q.trim().toLowerCase();const hits=text?all.filter(p=>[p.title,p.summary,p.section,...(p.tags||[])].join(' ').toLowerCase().includes(text)).slice(0,20):all.slice(0,8);results.innerHTML=hits.length?hits.map(p=>`<a class="search-hit" href="${esc(p.url)}">${esc(p.title)}<small>${esc(p.section)}${p.date?' · '+esc(p.date):''}</small></a>`).join(''):`<div class="search-empty">${text?'No matching writeups found.':'No published articles yet.'}</div>`;}
+  function openSearch(){overlay?.classList.add('open');document.body.style.overflow='hidden';input?.focus();search(input?.value||'')}
+  function closeSearch(){overlay?.classList.remove('open');document.body.style.overflow='';}
+  document.getElementById('open-search')?.addEventListener('click',openSearch);
+  document.getElementById('close-search')?.addEventListener('click',closeSearch);
+  overlay?.addEventListener('click',e=>{if(e.target===overlay)closeSearch()});
+  input?.addEventListener('input',()=>search(input.value));
+  document.addEventListener('keydown',event=>{if((event.key==='/'&&!['INPUT','TEXTAREA'].includes(document.activeElement?.tagName))||(event.ctrlKey&&event.key==='k')){event.preventDefault();openSearch();}if(event.key==='Escape')closeSearch();});
+})();
