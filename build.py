@@ -9,14 +9,14 @@ import html
 import json
 import re
 from collections import Counter, defaultdict
-from datetime import date
+from datetime import date, datetime, time
 from pathlib import Path
 from urllib.parse import quote
 
 ROOT = Path(__file__).resolve().parent
 POST_DIR = ROOT / 'posts'
 SITE = 'https://abdullah-5j.github.io'
-ASSET_VERSION = 'verox-20261015-font-footer'
+ASSET_VERSION = 'verox-20261024-tryhackme'
 SECTIONS = {
     'hackthebox': 'Hack The Box',
     'research': 'Research',
@@ -96,7 +96,7 @@ def sidebar(active):
     ss.append(f'<span id="theme-control-container"><button id="theme-toggle" class="theme-control" aria-label="Choose appearance" aria-expanded="false" title="Appearance">{svg("moon")}</button><span class="theme-menu" id="theme-menu" role="menu"><button type="button" data-theme-choice="light">☀ &nbsp; Light</button><button type="button" data-theme-choice="dark">☾ &nbsp; Dark</button><button type="button" data-theme-choice="system">▣ &nbsp; System</button></span></span>')
     nav=''.join(nav_item(*x[:3],active=(x[3]==active)) for x in links)
     return f'''<aside class="sidebar" id="sidebar">
-    <div class="identity"><a href="/writeups/" aria-label="verox Writeups"><img class="portrait" src="/assets/avatar.jpg?v={ASSET_VERSION}" alt="verox Hacker Pepe avatar"/></a><a class="brand" href="/writeups/">verox</a><p class="subtitle">Writeups &amp; Thoughts</p></div>
+    <div class="identity"><a href="/writeups/" aria-label="verox Writeups"><img class="portrait" src="/assets/avatar-king.png?v={ASSET_VERSION}" alt="verox crowned king avatar"/></a><a class="brand" href="/writeups/">verox</a><p class="subtitle">Writeups &amp; Thoughts</p></div>
     <nav class="side-nav" aria-label="Primary">{nav}</nav>
     <div class="social-wrap"><div class="social-icons">{''.join(ss)}</div></div><div class="copyright">© 2026 verox</div>
     </aside>'''
@@ -116,9 +116,9 @@ def rail(posts):
 def wrapper(title, active, current, body, posts, description='Cybersecurity writeups, research, and thoughts by verox.'):
     seo_url = ('/writeups/' if current=='Writeups' else '/'+current.lower().replace(' ','-')+'/')
     return f'''<!doctype html><html lang="en" data-theme="dark"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="description" content="{h(description)}"/><meta name="theme-color" content="#1b1b1e"/><meta property="og:site_name" content="verox"/>
+    <meta name="description" content="{h(description)}"/><meta name="theme-color" content="#0c1522"/><meta property="og:site_name" content="verox"/>
     <meta property="og:title" content="{h(title)} | verox"/><meta property="og:description" content="{h(description)}"/>
-    <title>{h(title)} | verox</title><link rel="icon" href="/assets/avatar.jpg?v={ASSET_VERSION}"/><link rel="stylesheet" href="/assets/style.css?v={ASSET_VERSION}"/>
+    <title>{h(title)} | verox</title><link rel="icon" href="/assets/avatar-king.png?v={ASSET_VERSION}"/><link rel="stylesheet" href="/assets/style.css?v={ASSET_VERSION}"/>
     <script>try{{const t=localStorage.getItem('verox-theme')||'dark';document.documentElement.dataset.theme=t==='system'?(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'):t}}catch(e){{}}</script></head>
     <body>{sidebar(active)}<div class="shell"><header class="topbar"><div class="crumbs"><button class="mobile-trigger" id="mobile-trigger" aria-label="Toggle menu">{svg('menu')}</button><a href="/writeups/">verox</a><span class="crumb-sep">›</span><span>{h(current)}</span></div><button type="button" class="search-pill" id="open-search" aria-label="Search articles">{svg('search')}Search...</button></header>
     <div class="layout"><main class="main-content" id="main">{body}</main>{rail(posts)}</div>
@@ -138,7 +138,7 @@ def link_panel(label, url, count=None):
 
 def post_card(p):
     dt=f'<span>{svg("calendar",15)} {h(p["date_short"])}</span>' if p['date_short'] else ''
-    meta=f'<div class="post-card-meta">{dt}<span>{h(SECTIONS[p["section"]])}</span></div>'
+    meta=f'<div class="post-card-meta">{dt}<span>{svg("folder",15)} {h(SECTIONS[p["section"]])}</span></div>'
     image=f'<img class="post-thumb" src="{h(p["image"])}" alt="" loading="lazy"/>' if p.get('image') else ''
     return f'<article class="post-card{"" if image else " no-thumb"}"><div class="post-card-body"><h3 class="post-card-title"><a href="{h(p["url"])}">{h(p["title"])}</a></h3><p class="post-card-desc">{h(p["summary"])}</p>{meta}</div>{image}</article>'
 
@@ -161,22 +161,29 @@ def read_posts():
         if not title or section not in SECTIONS:
             raise ValueError(f'{file}: title and section ({", ".join(SECTIONS)}) are required')
         value=data.get('date')
-        published=value.isoformat() if isinstance(value,date) else str(value).strip() if value else ''
+        published=value.isoformat() if isinstance(value,(date,datetime)) else str(value).strip() if value else ''
         if published:
-            try: dt=date.fromisoformat(published)
-            except ValueError as ex: raise ValueError(f'{file}: date must be YYYY-MM-DD') from ex
+            try:
+                parsed=datetime.fromisoformat(published.replace('Z','+00:00'))
+                dt=parsed.replace(tzinfo=None)
+            except ValueError:
+                try: dt=datetime.combine(date.fromisoformat(published),time.min)
+                except ValueError as ex: raise ValueError(f'{file}: date must be an ISO date or timestamp') from ex
         else: dt=None
         rel=file.relative_to(POST_DIR)
         slug = '-'.join(re.findall(r'[a-z0-9]+',rel.stem.lower())) or 'post'
         section_dir='thoughts' if section=='thoughts' else f'writeups/{section}'
         url=f'/{section_dir}/{slug}/'
+        short_date=(dt.strftime('%b ') + str(dt.day) + dt.strftime(', %Y')) if dt else ''
+        if dt and ('T' in published or re.search(r'\d{2}:\d{2}',published)):
+            short_date += ' · ' + dt.strftime('%I:%M %p').lstrip('0')
         out.append({'title':title,'summary':str(data.get('summary') or '').strip(),'section':section,
-                    'date':published,'date_short':(dt.strftime('%b ') + str(dt.day) + dt.strftime(', %Y')) if dt else '',
+                    'date':published,'date_short':short_date,
                     'dt':dt,'url':url,'tags':[str(t).strip().lower() for t in (data.get('tags') or [])],
                     'image':str(data.get('image') or '').strip(), 'body':body, 'source':str(rel)})
     urls=[p['url'] for p in out]
     if len(urls)!=len(set(urls)):raise ValueError('Duplicate post slugs: rename one of the conflicting Markdown files')
-    return sorted(out,key=lambda p:(p['dt'] or date.min,p['title'].lower()),reverse=True)
+    return sorted(out,key=lambda p:(p['dt'] or datetime.min,p['title'].lower()),reverse=True)
 
 
 def article_html(p):

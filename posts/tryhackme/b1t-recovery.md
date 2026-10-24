@@ -1,0 +1,47 @@
+---
+title: "B1t Recovery"
+section: tryhackme
+date: "2026-08-09T00:17:32+05:00"
+summary: "Known plaintext from the THM flag prefix recovers a reused four-byte XOR key and decrypts the challenge file."
+tags: ["tryhackme", "overflow-the-jackpot", "xor", "known-plaintext", "cryptography"]
+image: "/assets/images/tryhackme/b1t-recovery/challenge-source.png"
+---
+I first checked the provided Python file to see how the flag was encrypted.
+
+```bash
+cat challenge.py
+```
+
+![Challenge source](/assets/images/tryhackme/b1t-recovery/challenge-source.png)
+
+The script uses `os.urandom(4)`, so the XOR key is only 4 bytes long and gets reused across the flag.
+
+Since every TryHackMe flag starts with `THM{`, I could use those known 4 bytes to recover the full 4-byte key. I wrote a small solve script to XOR the first four ciphertext bytes with `THM{`, then reuse that key to decrypt the whole file.
+
+```python
+from pwn import xor
+
+ciphertext = open("encrypted.bin", "rb").read()
+
+known = b"THM{"
+key = xor(ciphertext[:4], known)
+
+print("Recovered key:", key.hex())
+
+plaintext = xor(ciphertext, key)
+print("Plaintext:", plaintext.decode())
+```
+
+I ran the script against the encrypted file.
+
+```bash
+python3 solve.py
+```
+
+![Recovered flag](/assets/images/tryhackme/b1t-recovery/flag-recovery.png)
+
+The key was recovered successfully and the plaintext revealed the flag:
+
+```text
+THM{X0r_K3y_r3c0verY_***_*****_****_****_****}
+```

@@ -1,0 +1,88 @@
+<!doctype html><html lang="en" data-theme="dark"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="description" content="A detection-as-code investigation repairs five broken Sigma rules and validates each fix against the incident report."/><meta name="theme-color" content="#0c1522"/><meta property="og:site_name" content="verox"/>
+    <meta property="og:title" content="Fresh Powder | verox"/><meta property="og:description" content="A detection-as-code investigation repairs five broken Sigma rules and validates each fix against the incident report."/>
+    <title>Fresh Powder | verox</title><link rel="icon" href="/assets/avatar-king.png?v=verox-20261024-tryhackme"/><link rel="stylesheet" href="/assets/style.css?v=verox-20261024-tryhackme"/>
+    <script>try{const t=localStorage.getItem('verox-theme')||'dark';document.documentElement.dataset.theme=t==='system'?(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'):t}catch(e){}</script></head>
+    <body><aside class="sidebar" id="sidebar">
+    <div class="identity"><a href="/writeups/" aria-label="verox Writeups"><img class="portrait" src="/assets/avatar-king.png?v=verox-20261024-tryhackme" alt="verox crowned king avatar"/></a><a class="brand" href="/writeups/">verox</a><p class="subtitle">Writeups &amp; Thoughts</p></div>
+    <nav class="side-nav" aria-label="Primary"><a class="nav-item active" href="/writeups/" aria-current="page"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L3 12.5V21h8.5z"/><path d="m16 8-2 2"/><path d="M3 21l9-9"/></svg><span>WRITEUPS</span></a><a class="nav-item" href="/thoughts/" ><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 18V5a3 3 0 0 0-5.5-1.6A4 4 0 0 0 4 10a4 4 0 0 0 2 7 4 4 0 0 0 6 1"/><path d="M12 18V5a3 3 0 0 1 5.5-1.6A4 4 0 0 1 20 10a4 4 0 0 1-2 7 4 4 0 0 1-6 1"/><path d="M9 9c-2 0-3 1-3 3m9-3c2 0 3 1 3 3"/></svg><span>THOUGHTS</span></a><a class="nav-item" href="/archives/" ><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="4" rx="1"/><path d="M5 8v12h14V8M10 12h4"/></svg><span>ARCHIVES</span></a><a class="nav-item" href="/categories/" ><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg><span>CATEGORIES</span></a><a class="nav-item" href="/tags/" ><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12l-8 8-9-9V4h7z"/><circle cx="7.5" cy="8" r="1"/></svg><span>TAGS</span></a></nav>
+    <div class="social-wrap"><div class="social-icons"><a class="social-link" href="/writeups/" title="Website" aria-label="Website"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="15" rx="2"/><path d="M8 22h8m-4-4v4"/></svg></a><a class="social-link" href="https://github.com/abdullah-5j" title="GitHub" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-4.3 1.3-4.3-2.2-6-2.5M9 22v-3.3c-4.5 1-6-1.8-6-5.3a5 5 0 0 1 1.3-3.5c-.1-.8-.5-2.4.2-3.7 0 0 1.4-.4 4 1.6a13 13 0 0 1 7 0c2.6-2 4-1.6 4-1.6.7 1.3.3 2.9.2 3.7a5 5 0 0 1 1.3 3.5c0 3.5-1.5 6.3-6 5.3V22"/></svg></a><a class="social-link" href="https://x.com/abdullah5j009" title="X" aria-label="X" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3l18 18M3 21 21 3M3 3h4l14 18h-4L3 3z"/></svg></a><a class="social-link" href="https://medium.com/@abdullah5j009" title="Medium" aria-label="Medium" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5.5" cy="12" r="4.6" fill="currentColor" stroke="none"/><ellipse cx="15.5" cy="12" rx="2.7" ry="4.4" fill="currentColor" stroke="none"/><ellipse cx="21" cy="12" rx="1.2" ry="4.1" fill="currentColor" stroke="none"/></svg></a><a class="social-link" href="https://tryhackme.com/p/Verox." title="TryHackMe" aria-label="TryHackMe" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></a><a class="social-link" href="https://app.hackthebox.com/users/2654143" title="Hack The Box" aria-label="Hack The Box" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 9 5v10l-9 5-9-5V7zM3 7l9 5 9-5m-9 5v10"/></svg></a><button type="button" class="social-link" id="discord-copy" title="Copy Discord username: notabdu11ah" aria-label="Copy Discord username: notabdu11ah"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 5c-2-1-3-1.2-4-1.4l-.5 1.1a13 13 0 0 0-3 0L10 3.6C9 3.8 8 4 6 5 4 8 3 11 3 17c2 1.5 3.5 2.3 5 2.7l1-1.6m8 0 1 1.6c1.5-.4 3-1.2 5-2.7 0-6-1-9-3-12z"/><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/></svg></button><span id="theme-control-container"><button id="theme-toggle" class="theme-control" aria-label="Choose appearance" aria-expanded="false" title="Appearance"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 15.2A8 8 0 0 1 8.8 4 8 8 0 1 0 20 15.2Z"/></svg></button><span class="theme-menu" id="theme-menu" role="menu"><button type="button" data-theme-choice="light">☀ &nbsp; Light</button><button type="button" data-theme-choice="dark">☾ &nbsp; Dark</button><button type="button" data-theme-choice="system">▣ &nbsp; System</button></span></span></div></div><div class="copyright">© 2026 verox</div>
+    </aside><div class="shell"><header class="topbar"><div class="crumbs"><button class="mobile-trigger" id="mobile-trigger" aria-label="Toggle menu"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button><a href="/writeups/">verox</a><span class="crumb-sep">›</span><span>Fresh Powder</span></div><button type="button" class="search-pill" id="open-search" aria-label="Search articles"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.7" cy="10.7" r="7.5"/><path d="m16.5 16.5 4.6 4.6"/></svg>Search...</button></header>
+    <div class="layout"><main class="main-content" id="main"><article class="article"><div class="heading-block"><h1>Fresh Powder</h1><div class="article-meta">Aug 9, 2026 · 4:01 AM · TryHackMe</div></div><div class="article-body"><p>This challenge was a Detection-as-Code style task. Instead of exploiting a machine, I had to read the incident report, understand the attack chain, fix broken Sigma rules in pull requests, run the CI checks, and merge the rules when everything passed.</p>
+<p>The report was about POWDER WOLF activity against Cascadia Ski and Resort Collective. I mainly used the report to understand what happened, and <code>docs/environment-routines.md</code> to avoid alerting on normal activity.</p>
+<p><img src="/assets/images/tryhackme/fresh-powder/01-incident-report.png" alt="Incident Report" /></p>
+<hr />
+<h2 id="pr-1-external-rdp-from-untrusted-source">PR #1 External RDP From Untrusted Source</h2>
+<p>The first rule was meant to detect external RDP logons. The broken rule was filtering out <code>203.0.113.*</code>, but that was actually the attacker range from the report, not a trusted range.</p>
+<p><img src="/assets/images/tryhackme/fresh-powder/02-pr1-broken-rule.png" alt="PR1 Broken Rule" /></p>
+<p>I fixed the logic by filtering real trusted activity instead:</p>
+<ul>
+<li>internal admin RDP from <code>10.40.*</code></li>
+<li>approved VPN users from <code>10.90.*</code></li>
+<li>SummitDesk MSP only when the source range, account, and target host matched</li>
+</ul>
+<p>The red team test also showed that resumed RDP sessions can use <code>LogonType 7</code>, not only <code>LogonType 10</code>, so I added both.</p>
+<p>After the fix, all checks passed and I got the flag.</p>
+<p><img src="/assets/images/tryhackme/fresh-powder/03-pr1-flag.png" alt="PR1 Flag" /></p>
+<pre><code class="language-text">THM{Untru5ted_R4nge_Bu5ted}
+</code></pre>
+<hr />
+<h2 id="pr-2-netscan-delete-me-share-test">PR #2 NetScan <code>delete.me</code> Share Test</h2>
+<p>This one was for SoftPerfect NetScan testing writable admin shares. The original rule looked for <code>delete.me</code> in <code>ShareName</code>, but the report showed it was actually in <code>RelativeTargetName</code>.</p>
+<p><img src="/assets/images/tryhackme/fresh-powder/04-pr2-broken-rule.png" alt="PR2 Broken Rule" /></p>
+<p>I fixed it by detecting:</p>
+<ul>
+<li><code>EventID 5145</code></li>
+<li><code>RelativeTargetName</code> ending in <code>delete.me</code></li>
+<li><code>ShareName</code> ending in <code>$</code>, because admin shares like <code>C$</code> are hidden/admin shares</li>
+</ul>
+<p>After that, the rule passed validation and red team tests.</p>
+<p><img src="/assets/images/tryhackme/fresh-powder/05-pr2-flag.png" alt="PR2 Flag" /></p>
+<pre><code class="language-text">THM{D3l3t3_M3_G1v3s_1t_4w4y}
+</code></pre>
+<hr />
+<h2 id="pr-3-remote-access-tool-service-persistence">PR #3 Remote Access Tool Service Persistence</h2>
+<p>The report showed AnyDesk installed as a Windows service on a domain controller. The broken rule was looking at <code>Image</code>, but service installation logs use fields like <code>ServiceName</code> and <code>ServiceFileName</code>.</p>
+<p>I first fixed it for AnyDesk, then the red team tests showed the rule was too narrow because ScreenConnect and TeamViewer could be used the same way.</p>
+<p>So I generalized the rule to catch remote access tools installed as services, while filtering the normal helpdesk installs on workstation hosts like <code>SNW-PC</code>, <code>ALD-PC</code>, and <code>TBL-PC</code>.</p>
+<p><img src="/assets/images/tryhackme/fresh-powder/06-pr3-flag.png" alt="PR3 Flag" /></p>
+<pre><code class="language-text">THM{BaniKed_4ccess_Ch4nnel}
+</code></pre>
+<hr />
+<h2 id="pr-4-archive-from-live-network-share">PR #4 Archive From Live Network Share</h2>
+<p>The report showed 7-Zip being used to archive data directly from a live share like:</p>
+<pre><code class="language-text">\\FS-RESV01\ReservationsShare\*
+</code></pre>
+<p>The original rule checked for <code>-p</code>, but that is for password usage. The real behavior was archiving from a UNC share.</p>
+<p>I first matched the specific 7-Zip + file share behavior, but the red team tests showed it missed WinRAR, PowerShell <code>Compress-Archive</code>, renamed 7-Zip binaries, and backup server shares.</p>
+<p>So I generalized the detection to catch archive tools and PowerShell compressing directly from sensitive network shares, while filtering the known monthly reservation export job.</p>
+<p><img src="/assets/images/tryhackme/fresh-powder/07-pr4-flag.png" alt="PR4 Flag" /></p>
+<pre><code class="language-text">THM{Z1pp3d_Right_0ut_th3_D00r}
+</code></pre>
+<hr />
+<h2 id="pr-5-lynx-ransomware-deployment-staging">PR #5  Lynx Ransomware Deployment Staging</h2>
+<p>The last rule was for Lynx ransomware staging. The broken rule was looking for <code>services.exe</code> as the parent and <code>w\.exe</code> in the command line, but the report showed the payload was run from <code>cmd.exe</code> with flags like:</p>
+<pre><code class="language-text">--dir E:\ --mode fast --verbose --noprint
+</code></pre>
+<p>So instead of relying on the file name, I detected the command-line behavior:</p>
+<ul>
+<li><code>--dir</code></li>
+<li><code>--mode</code></li>
+<li><code>fast</code></li>
+<li><code>--verbose</code> or <code>--noprint</code></li>
+</ul>
+<p>I also filtered the legitimate <code>DiskOptimizer.exe</code> maintenance tool using its path, original file name, and service account.</p>
+<p><img src="/assets/images/tryhackme/fresh-powder/08-pr5-flag.png" alt="PR5 Flag" /></p>
+<pre><code class="language-text">THM{C4ught_B3f0re_th3_Th4w}
+</code></pre>
+<hr />
+<h2 id="final">Final</h2>
+<p>All workflows were green at the end.</p>
+<p><img src="/assets/images/tryhackme/fresh-powder/09-all-workflows-green.png" alt="All Done" /></p>
+<hr />
+<p>This challenge was mainly about detection tuning. The important thing was not just matching the sample attack event. The rule also had to avoid known normal behavior and survive small attacker changes.</p>
+</div></article></main><aside class="rail" aria-label="Related content"><div class="rail-section"><h2>Recently Updated</h2><a class="recent-link" href="/writeups/tryhackme/corp-website/">Corp Website</a><a class="recent-link" href="/writeups/tryhackme/cupidbot/">CupidBot</a><a class="recent-link" href="/writeups/tryhackme/tryheartme/">TryHeartMe</a><a class="recent-link" href="/writeups/tryhackme/speed-chatting/">Speed Chatting</a><a class="recent-link" href="/writeups/tryhackme/umbrella/">Umbrella</a></div>
+    <div class="rail-section"><h2>Topics</h2><div class="mini-tags"><a class="mini-tag" href="/tags/?tag=web-security">web-security</a><a class="mini-tag" href="/tags/?tag=binary-exploitation">binary-exploitation</a><a class="mini-tag" href="/tags/?tag=reverse-engineering">reverse-engineering</a><a class="mini-tag" href="/tags/?tag=digital-forensics">digital-forensics</a><a class="mini-tag" href="/tags/?tag=malware-analysis">malware-analysis</a><a class="mini-tag" href="/tags/?tag=windows-security">windows-security</a><a class="mini-tag" href="/tags/?tag=linux">linux</a><a class="mini-tag" href="/tags/?tag=network-security">network-security</a><a class="mini-tag" href="/tags/?tag=ctf">ctf</a><a class="mini-tag" href="/tags/?tag=privilege-escalation">privilege-escalation</a></div></div></aside></div>
+    <footer class="footer"><span>© 2026 <a href="/writeups/">verox</a>. Some rights reserved.</span><span>Design inspired by <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener noreferrer">Chirpy</a>.</span></footer></div>
+    <div class="search-backdrop" id="search-backdrop" role="dialog" aria-modal="true" aria-label="Search writeups"><div class="search-dialog"><div class="search-input-row"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.7" cy="10.7" r="7.5"/><path d="m16.5 16.5 4.6 4.6"/></svg><input type="search" autocomplete="off" id="search-input" aria-label="Search posts" placeholder="Search writeups and thoughts..."/><button id="close-search" class="close-search" type="button" aria-label="Close search">Esc</button></div><div class="search-results" id="search-results"></div></div></div>
+    <script src="/assets/app.js?v=verox-20261024-tryhackme" defer></script></body></html>
