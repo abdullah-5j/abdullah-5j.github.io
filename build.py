@@ -14,7 +14,6 @@ from collections import Counter, defaultdict
 from datetime import date, datetime, time, timezone
 from email.utils import format_datetime
 from pathlib import Path
-from urllib.parse import quote
 
 ROOT = Path(__file__).resolve().parent
 POST_DIR = ROOT / 'posts'
@@ -36,7 +35,6 @@ TOPICS = [
 
 AUTHOR = 'verox'
 AUTHOR_URL = f'{SITE}/writeups/'
-LICENSE_URL = 'https://creativecommons.org/licenses/by/4.0/'
 
 
 def h(value):
@@ -298,14 +296,6 @@ def article_html(p, posts):
     meta=[h(f'Posted {p["date_short"]}' if p['date_short'] else 'Published'),f'By <a href="/writeups/">{AUTHOR}</a>',h(f'{p["read_time"]} min read')]
     if p.get('event'): meta.append(h(p['event']))
     tags=''.join(f'<a class="post-tag" href="{tag_url(tag)}">{h(tag)}</a>' for tag in p['tags'])
-    canonical=SITE+p['url']
-    encoded_url=quote(canonical,safe=''); encoded_title=quote(p['title']+' | verox',safe='')
-    shares=f'''<div class="share-wrapper"><span>Share</span>
-    <a href="https://twitter.com/intent/tweet?text={encoded_title}&url={encoded_url}" target="_blank" rel="noopener" aria-label="Share on X">X</a>
-    <a href="https://www.facebook.com/sharer/sharer.php?u={encoded_url}" target="_blank" rel="noopener" aria-label="Share on Facebook">f</a>
-    <a href="https://t.me/share/url?url={encoded_url}&text={encoded_title}" target="_blank" rel="noopener" aria-label="Share on Telegram">↗</a>
-    <a href="mailto:?subject={encoded_title}&body={encoded_url}" aria-label="Share by email">@</a>
-    <button type="button" class="copy-link" data-url="{h(canonical)}" aria-label="Copy article link">Copy link</button></div>'''
     candidates=[]
     current_tags=set(p['tags'])
     for candidate in posts:
@@ -324,8 +314,7 @@ def article_html(p, posts):
     if newer: nav_bits.append(f'<a class="post-nav-link newer" href="{h(newer["url"])}"><small>Newer</small><span>{h(newer["title"])}</span></a>')
     post_nav=f'<nav class="post-navigation" aria-label="Post navigation">{"".join(nav_bits)}</nav>' if nav_bits else ''
     article=f'''<article class="article"><div class="heading-block"><h1>{h(p["title"])}</h1><div class="article-meta">{'<span>·</span>'.join(meta)}</div></div>
-    <div class="article-body">{body}</div><footer class="post-tail"><div class="post-taxonomy"><a class="post-category" href="{page_path(p['section'])}">{h(category)}</a><div class="post-tags">{tags}</div></div>
-    <div class="post-tail-bottom"><div class="license-wrapper">This post is licensed under <a href="{LICENSE_URL}" target="_blank" rel="license noopener">CC BY 4.0</a> by the author.</div>{shares}</div></footer></article>{related_section}{post_nav}'''
+    <div class="article-body">{body}</div><footer class="post-tail"><div class="post-taxonomy"><a class="post-category" href="{page_path(p['section'])}">{h(category)}</a><div class="post-tags">{tags}</div></div></footer></article>{related_section}{post_nav}'''
     return article,toc_html
 
 
