@@ -7,7 +7,6 @@ summary: "Leaked credentials lead to unsafe YAML deserialization, remote code ex
 tags: ["tryhackme", "byte-lotus", "unsafe-deserialization", "yaml", "linux", "privilege-escalation"]
 image: "/assets/images/tryhackme/beach-bar/beach-bar-cover-v2.png"
 image_fit: contain
-image_background: black
 ---
 **Tags:** `flask` `pyyaml-deserialization` `rce` `credential-reuse` `linux`
 
