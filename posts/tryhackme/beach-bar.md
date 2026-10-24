@@ -5,7 +5,7 @@ date: "2026-08-09"
 order: 7
 summary: "Leaked credentials lead to unsafe YAML deserialization, remote code execution, and Linux privilege escalation."
 tags: ["tryhackme", "byte-lotus", "unsafe-deserialization", "yaml", "linux", "privilege-escalation"]
-image: "/assets/images/tryhackme/beach-bar/beach-bar-cover.png"
+image: "/assets/images/tryhackme/beach-bar/beach-bar-cover-v2.png"
 image_fit: contain
 image_background: black
 ---
