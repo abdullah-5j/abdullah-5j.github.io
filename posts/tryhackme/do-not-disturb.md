@@ -5,7 +5,7 @@ date: "2026-08-07"
 order: 8
 summary: "A NoSQL authentication bypass opens an EJS SSTI path, followed by debugger hijacking and privilege escalation."
 tags: ["tryhackme", "byte-lotus", "nosql-injection", "ssti", "nodejs", "privilege-escalation"]
-image: "/assets/images/tryhackme/do-not-disturb/cover-provided.png"
+image: "/assets/images/tryhackme/do-not-disturb/do-not-disturb-cover.png"
 image_fit: contain
 ---
 > Byte Lotus Hotel · "Do Not Disturb" series · Boot2Root ·

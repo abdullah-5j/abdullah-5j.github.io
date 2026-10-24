@@ -5,7 +5,7 @@ date: "2026-05-10"
 order: 17
 summary: "CVE-2025-55182 provides remote code execution before a permissive sudo path completes privilege escalation."
 tags: ["tryhackme", "love-at-first-breach", "cve", "rce", "sudo", "privilege-escalation"]
-image: "/assets/images/tryhackme/corp-website/cover-provided.png"
+image: "/assets/images/tryhackme/corp-website/corp-website-cover.png"
 image_fit: contain
 ---
 **Room:** [Love at First Breach 2026 – Corp Website](https://tryhackme.com/room/lafb2026e7)

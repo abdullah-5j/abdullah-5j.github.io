@@ -141,7 +141,8 @@ def post_card(p):
     event=f'<span class="post-event">{h(p["event"])}</span>' if p.get('event') else ''
     meta=f'<div class="post-card-meta">{dt}<span>{svg("folder",15)} {h(SECTIONS[p["section"]])}</span>{event}</div>'
     fit=' contain' if p.get('image_fit') == 'contain' else ''
-    image=f'<img class="post-thumb{fit}" src="{h(p["image"])}" alt="{h(p["title"])} artwork" loading="lazy"/>' if p.get('image') else ''
+    background=' black' if p.get('image_background') == 'black' else ''
+    image=f'<img class="post-thumb{fit}{background}" src="{h(p["image"])}" alt="{h(p["title"])} artwork" loading="lazy"/>' if p.get('image') else ''
     return f'<article class="post-card{"" if image else " no-thumb"}"><div class="post-card-body"><h3 class="post-card-title"><a href="{h(p["url"])}">{h(p["title"])}</a></h3><p class="post-card-desc">{h(p["summary"])}</p>{meta}</div>{image}</article>'
 
 
@@ -182,10 +183,14 @@ def read_posts():
         image_fit=str(data.get('image_fit') or 'cover').strip().lower()
         if image_fit not in ('cover','contain'):
             raise ValueError(f'{file}: image_fit must be cover or contain')
+        image_background=str(data.get('image_background') or '').strip().lower()
+        if image_background not in ('','black'):
+            raise ValueError(f'{file}: image_background must be black when provided')
         out.append({'title':title,'summary':str(data.get('summary') or '').strip(),'section':section,
                     'date':published,'date_short':short_date,
                     'dt':dt,'url':url,'tags':[str(t).strip().lower() for t in (data.get('tags') or [])],
                     'image':str(data.get('image') or '').strip(), 'image_fit':image_fit,
+                    'image_background':image_background,
                     'event':str(data.get('event') or '').strip(), 'body':body, 'source':str(rel),
                     'order':display_order})
     urls=[p['url'] for p in out]
