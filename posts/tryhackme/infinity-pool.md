@@ -5,8 +5,8 @@ date: "2026-08-03"
 order: 10
 summary: "Command injection in a legacy network-check endpoint leads through internal services to full compromise."
 tags: ["tryhackme", "byte-lotus", "command-injection", "ssrf", "linux", "privilege-escalation"]
-image: "/assets/images/tryhackme/infinity-pool/cover-provided.webp"
-image_fit: cover
+image: "/assets/images/tryhackme/infinity-pool/infinity-pool-cover.png"
+image_fit: contain
 ---
 Boot2Root
 
