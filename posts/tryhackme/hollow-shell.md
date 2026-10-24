@@ -1,7 +1,8 @@
 ---
 title: "Hollow Shell"
 section: tryhackme
-date: "2026-08-13T16:13:15+05:00"
+date: "2026-08-05"
+order: 9
 summary: "Default credentials and a Zip Slip upload escape the theme directory and turn an automation hook into code execution."
 tags: ["tryhackme", "byte-lotus", "zip-slip", "file-upload", "rce", "linux"]
 image: "/assets/images/tryhackme/hollow-shell/dashboard-fresh.png"

@@ -1,7 +1,8 @@
 ---
 title: "The Guestbook"
 section: tryhackme
-date: "2026-08-13T16:14:42+05:00"
+date: "2026-07-29"
+order: 12
 summary: "Prompt injection against an AI concierge reveals hidden directives and bypasses output redaction."
 tags: ["tryhackme", "byte-lotus", "ai-security", "prompt-injection", "web-security"]
 image: "/assets/images/tryhackme/the-guestbook/naive-attempt.png"

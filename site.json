@@ -1,223 +1,9 @@
 [
   {
-    "title": "Corp Website",
-    "summary": "CVE-2025-55182 provides remote code execution before a permissive sudo path completes privilege escalation.",
-    "section": "tryhackme",
-    "date": "2026-08-17T23:08:12+05:00",
-    "url": "/writeups/tryhackme/corp-website/",
-    "tags": [
-      "tryhackme",
-      "love-at-first-breach",
-      "cve",
-      "rce",
-      "sudo",
-      "privilege-escalation"
-    ]
-  },
-  {
-    "title": "CupidBot",
-    "summary": "The bot leaks its verification code, which can be replayed to authorize disclosure of all three challenge flags.",
-    "section": "tryhackme",
-    "date": "2026-08-14T01:34:07+05:00",
-    "url": "/writeups/tryhackme/cupidbot/",
-    "tags": [
-      "tryhackme",
-      "love-at-first-breach",
-      "chatbot",
-      "information-disclosure",
-      "web-security"
-    ]
-  },
-  {
-    "title": "TryHeartMe",
-    "summary": "An improperly protected JWT lets a normal shopper forge an admin role and redeem the staff-only flag.",
-    "section": "tryhackme",
-    "date": "2026-08-13T20:26:03+05:00",
-    "url": "/writeups/tryhackme/tryheartme/",
-    "tags": [
-      "tryhackme",
-      "love-at-first-breach",
-      "jwt",
-      "authorization",
-      "web-security"
-    ]
-  },
-  {
-    "title": "Speed Chatting",
-    "summary": "An unrestricted profile-image upload accepts executable Python and turns a chat account into a reverse shell.",
-    "section": "tryhackme",
-    "date": "2026-08-13T17:17:41+05:00",
-    "url": "/writeups/tryhackme/speed-chatting/",
-    "tags": [
-      "tryhackme",
-      "love-at-first-breach",
-      "file-upload",
-      "python",
-      "reverse-shell"
-    ]
-  },
-  {
-    "title": "Umbrella",
-    "summary": "An exposed Docker registry leaks database credentials, leading through cracked hashes, command injection, and a privileged container to root.",
-    "section": "tryhackme",
-    "date": "2026-08-13T16:16:44+05:00",
-    "url": "/writeups/tryhackme/umbrella/",
-    "tags": [
-      "tryhackme",
-      "docker",
-      "registry",
-      "command-injection",
-      "privilege-escalation"
-    ]
-  },
-  {
-    "title": "Eavesdropper",
-    "summary": "SSH access as Frank and process monitoring with pspy reveal credentials used for root privilege escalation.",
-    "section": "tryhackme",
-    "date": "2026-08-13T16:16:04+05:00",
-    "url": "/writeups/tryhackme/eavesdropper/",
-    "tags": [
-      "tryhackme",
-      "linux",
-      "pspy",
-      "credential-discovery",
-      "privilege-escalation"
-    ]
-  },
-  {
-    "title": "Towel on the Sunbed",
-    "summary": "A race condition lets parallel reward claims bypass the 24-hour lock and open the Whale Vault.",
-    "section": "tryhackme",
-    "date": "2026-08-13T16:15:06+05:00",
-    "url": "/writeups/tryhackme/towel-on-the-sunbed/",
-    "tags": [
-      "tryhackme",
-      "byte-lotus",
-      "race-condition",
-      "web-security"
-    ]
-  },
-  {
-    "title": "The Guestbook",
-    "summary": "Prompt injection against an AI concierge reveals hidden directives and bypasses output redaction.",
-    "section": "tryhackme",
-    "date": "2026-08-13T16:14:42+05:00",
-    "url": "/writeups/tryhackme/the-guestbook/",
-    "tags": [
-      "tryhackme",
-      "byte-lotus",
-      "ai-security",
-      "prompt-injection",
-      "web-security"
-    ]
-  },
-  {
-    "title": "Room 404",
-    "summary": "An exposed .git directory leaks the staging source and a flag left in the repository.",
-    "section": "tryhackme",
-    "date": "2026-08-13T16:14:11+05:00",
-    "url": "/writeups/tryhackme/room-404/",
-    "tags": [
-      "tryhackme",
-      "byte-lotus",
-      "source-code-disclosure",
-      "git",
-      "web-security"
-    ]
-  },
-  {
-    "title": "Infinity Pool",
-    "summary": "Command injection in a legacy network-check endpoint leads through internal services to full compromise.",
-    "section": "tryhackme",
-    "date": "2026-08-13T16:13:41+05:00",
-    "url": "/writeups/tryhackme/infinity-pool/",
-    "tags": [
-      "tryhackme",
-      "byte-lotus",
-      "command-injection",
-      "ssrf",
-      "linux",
-      "privilege-escalation"
-    ]
-  },
-  {
-    "title": "Hollow Shell",
-    "summary": "Default credentials and a Zip Slip upload escape the theme directory and turn an automation hook into code execution.",
-    "section": "tryhackme",
-    "date": "2026-08-13T16:13:15+05:00",
-    "url": "/writeups/tryhackme/hollow-shell/",
-    "tags": [
-      "tryhackme",
-      "byte-lotus",
-      "zip-slip",
-      "file-upload",
-      "rce",
-      "linux"
-    ]
-  },
-  {
-    "title": "Do Not Disturb",
-    "summary": "A NoSQL authentication bypass opens an EJS SSTI path, followed by debugger hijacking and privilege escalation.",
-    "section": "tryhackme",
-    "date": "2026-08-13T16:12:01+05:00",
-    "url": "/writeups/tryhackme/do-not-disturb/",
-    "tags": [
-      "tryhackme",
-      "byte-lotus",
-      "nosql-injection",
-      "ssti",
-      "nodejs",
-      "privilege-escalation"
-    ]
-  },
-  {
-    "title": "Beach Bar",
-    "summary": "Leaked credentials lead to unsafe YAML deserialization, remote code execution, and Linux privilege escalation.",
-    "section": "tryhackme",
-    "date": "2026-08-13T16:11:25+05:00",
-    "url": "/writeups/tryhackme/beach-bar/",
-    "tags": [
-      "tryhackme",
-      "byte-lotus",
-      "unsafe-deserialization",
-      "yaml",
-      "linux",
-      "privilege-escalation"
-    ]
-  },
-  {
-    "title": "Cupid’s Matchmaker",
-    "summary": "Stored XSS in a matchmaking survey steals the reviewer’s session cookie and exposes the flag.",
-    "section": "tryhackme",
-    "date": "2026-08-13T15:50:54+05:00",
-    "url": "/writeups/tryhackme/cupids-matchmaker/",
-    "tags": [
-      "tryhackme",
-      "love-at-first-breach",
-      "xss",
-      "cookie-theft",
-      "web-security"
-    ]
-  },
-  {
-    "title": "When Hearts Collide",
-    "summary": "A broken MD5-based image matcher can be defeated with a collision to force a successful match.",
-    "section": "tryhackme",
-    "date": "2026-08-13T13:05:14+05:00",
-    "url": "/writeups/tryhackme/when-hearts-collide/",
-    "tags": [
-      "tryhackme",
-      "love-at-first-breach",
-      "md5",
-      "hash-collision",
-      "cryptography"
-    ]
-  },
-  {
     "title": "hc0n Christmas CTF",
     "summary": "A long-form challenge chaining web enumeration, CBC padding-oracle abuse, credential discovery, binary analysis, and buffer overflow exploitation.",
     "section": "tryhackme",
-    "date": "2026-08-13T13:02:11+05:00",
+    "date": "2026-09-05",
     "url": "/writeups/tryhackme/hc0n-christmas-ctf/",
     "tags": [
       "tryhackme",
@@ -229,24 +15,10 @@
     ]
   },
   {
-    "title": "Love Letter Locker",
-    "summary": "An insecure direct object reference exposes another user’s private letter—and the flag—by changing its numeric ID.",
-    "section": "tryhackme",
-    "date": "2026-08-12T19:28:48+05:00",
-    "url": "/writeups/tryhackme/love-letter-locker/",
-    "tags": [
-      "tryhackme",
-      "love-at-first-breach",
-      "idor",
-      "access-control",
-      "web-security"
-    ]
-  },
-  {
     "title": "Agent P",
     "summary": "A multi-stage chain moves from WordPress SQL injection through database credentials, unsafe pickle loading, and a signed-task binary to root.",
     "section": "tryhackme",
-    "date": "2026-08-12T14:23:46+05:00",
+    "date": "2026-08-09",
     "url": "/writeups/tryhackme/agent-p/",
     "tags": [
       "tryhackme",
@@ -261,7 +33,7 @@
     "title": "Lost Fortune Included",
     "summary": "A PHP stream-wrapper bypass defeats the document whitelist and reads arbitrary files from the server.",
     "section": "tryhackme",
-    "date": "2026-08-09T21:12:26+05:00",
+    "date": "2026-08-08",
     "url": "/writeups/tryhackme/lost-fortune-included/",
     "tags": [
       "tryhackme",
@@ -272,24 +44,24 @@
     ]
   },
   {
-    "title": "Fresh Powder",
-    "summary": "A detection-as-code investigation repairs five broken Sigma rules and validates each fix against the incident report.",
+    "title": "B1t Recovery",
+    "summary": "Known plaintext from the THM flag prefix recovers a reused four-byte XOR key and decrypts the challenge file.",
     "section": "tryhackme",
-    "date": "2026-08-09T04:01:59+05:00",
-    "url": "/writeups/tryhackme/fresh-powder/",
+    "date": "2026-08-07",
+    "url": "/writeups/tryhackme/b1t-recovery/",
     "tags": [
       "tryhackme",
       "overflow-the-jackpot",
-      "sigma",
-      "detection-engineering",
-      "blue-team"
+      "xor",
+      "known-plaintext",
+      "cryptography"
     ]
   },
   {
     "title": "Casino Heist",
     "summary": "Packet-capture analysis and PyInstaller reverse engineering recover the key used to decrypt exfiltrated jackpot data.",
     "section": "tryhackme",
-    "date": "2026-08-09T01:26:05+05:00",
+    "date": "2026-08-06",
     "url": "/writeups/tryhackme/casino-heist/",
     "tags": [
       "tryhackme",
@@ -301,17 +73,245 @@
     ]
   },
   {
-    "title": "B1t Recovery",
-    "summary": "Known plaintext from the THM flag prefix recovers a reused four-byte XOR key and decrypts the challenge file.",
+    "title": "Fresh Powder",
+    "summary": "A detection-as-code investigation repairs five broken Sigma rules and validates each fix against the incident report.",
     "section": "tryhackme",
-    "date": "2026-08-09T00:17:32+05:00",
-    "url": "/writeups/tryhackme/b1t-recovery/",
+    "date": "2026-08-06",
+    "url": "/writeups/tryhackme/fresh-powder/",
     "tags": [
       "tryhackme",
       "overflow-the-jackpot",
-      "xor",
-      "known-plaintext",
+      "sigma",
+      "detection-engineering",
+      "blue-team"
+    ]
+  },
+  {
+    "title": "Beach Bar",
+    "summary": "Leaked credentials lead to unsafe YAML deserialization, remote code execution, and Linux privilege escalation.",
+    "section": "tryhackme",
+    "date": "2026-08-09",
+    "url": "/writeups/tryhackme/beach-bar/",
+    "tags": [
+      "tryhackme",
+      "byte-lotus",
+      "unsafe-deserialization",
+      "yaml",
+      "linux",
+      "privilege-escalation"
+    ]
+  },
+  {
+    "title": "Do Not Disturb",
+    "summary": "A NoSQL authentication bypass opens an EJS SSTI path, followed by debugger hijacking and privilege escalation.",
+    "section": "tryhackme",
+    "date": "2026-08-07",
+    "url": "/writeups/tryhackme/do-not-disturb/",
+    "tags": [
+      "tryhackme",
+      "byte-lotus",
+      "nosql-injection",
+      "ssti",
+      "nodejs",
+      "privilege-escalation"
+    ]
+  },
+  {
+    "title": "Hollow Shell",
+    "summary": "Default credentials and a Zip Slip upload escape the theme directory and turn an automation hook into code execution.",
+    "section": "tryhackme",
+    "date": "2026-08-05",
+    "url": "/writeups/tryhackme/hollow-shell/",
+    "tags": [
+      "tryhackme",
+      "byte-lotus",
+      "zip-slip",
+      "file-upload",
+      "rce",
+      "linux"
+    ]
+  },
+  {
+    "title": "Infinity Pool",
+    "summary": "Command injection in a legacy network-check endpoint leads through internal services to full compromise.",
+    "section": "tryhackme",
+    "date": "2026-08-03",
+    "url": "/writeups/tryhackme/infinity-pool/",
+    "tags": [
+      "tryhackme",
+      "byte-lotus",
+      "command-injection",
+      "ssrf",
+      "linux",
+      "privilege-escalation"
+    ]
+  },
+  {
+    "title": "Room 404",
+    "summary": "An exposed .git directory leaks the staging source and a flag left in the repository.",
+    "section": "tryhackme",
+    "date": "2026-08-01",
+    "url": "/writeups/tryhackme/room-404/",
+    "tags": [
+      "tryhackme",
+      "byte-lotus",
+      "source-code-disclosure",
+      "git",
+      "web-security"
+    ]
+  },
+  {
+    "title": "The Guestbook",
+    "summary": "Prompt injection against an AI concierge reveals hidden directives and bypasses output redaction.",
+    "section": "tryhackme",
+    "date": "2026-07-29",
+    "url": "/writeups/tryhackme/the-guestbook/",
+    "tags": [
+      "tryhackme",
+      "byte-lotus",
+      "ai-security",
+      "prompt-injection",
+      "web-security"
+    ]
+  },
+  {
+    "title": "Towel on the Sunbed",
+    "summary": "A race condition lets parallel reward claims bypass the 24-hour lock and open the Whale Vault.",
+    "section": "tryhackme",
+    "date": "2026-07-27",
+    "url": "/writeups/tryhackme/towel-on-the-sunbed/",
+    "tags": [
+      "tryhackme",
+      "byte-lotus",
+      "race-condition",
+      "web-security"
+    ]
+  },
+  {
+    "title": "Eavesdropper",
+    "summary": "SSH access as Frank and process monitoring with pspy reveal credentials used for root privilege escalation.",
+    "section": "tryhackme",
+    "date": "2026-06-21",
+    "url": "/writeups/tryhackme/eavesdropper/",
+    "tags": [
+      "tryhackme",
+      "linux",
+      "pspy",
+      "credential-discovery",
+      "privilege-escalation"
+    ]
+  },
+  {
+    "title": "Umbrella",
+    "summary": "An exposed Docker registry leaks database credentials, leading through cracked hashes, command injection, and a privileged container to root.",
+    "section": "tryhackme",
+    "date": "2026-06-07",
+    "url": "/writeups/tryhackme/umbrella/",
+    "tags": [
+      "tryhackme",
+      "docker",
+      "registry",
+      "command-injection",
+      "privilege-escalation"
+    ]
+  },
+  {
+    "title": "Cupid’s Matchmaker",
+    "summary": "Stored XSS in a matchmaking survey steals the reviewer’s session cookie and exposes the flag.",
+    "section": "tryhackme",
+    "date": "2026-05-03",
+    "url": "/writeups/tryhackme/cupids-matchmaker/",
+    "tags": [
+      "tryhackme",
+      "love-at-first-breach",
+      "xss",
+      "cookie-theft",
+      "web-security"
+    ]
+  },
+  {
+    "title": "Corp Website",
+    "summary": "CVE-2025-55182 provides remote code execution before a permissive sudo path completes privilege escalation.",
+    "section": "tryhackme",
+    "date": "2026-05-10",
+    "url": "/writeups/tryhackme/corp-website/",
+    "tags": [
+      "tryhackme",
+      "love-at-first-breach",
+      "cve",
+      "rce",
+      "sudo",
+      "privilege-escalation"
+    ]
+  },
+  {
+    "title": "CupidBot",
+    "summary": "The bot leaks its verification code, which can be replayed to authorize disclosure of all three challenge flags.",
+    "section": "tryhackme",
+    "date": "2026-05-14",
+    "url": "/writeups/tryhackme/cupidbot/",
+    "tags": [
+      "tryhackme",
+      "love-at-first-breach",
+      "chatbot",
+      "information-disclosure",
+      "web-security"
+    ]
+  },
+  {
+    "title": "Speed Chatting",
+    "summary": "An unrestricted profile-image upload accepts executable Python and turns a chat account into a reverse shell.",
+    "section": "tryhackme",
+    "date": "2026-05-18",
+    "url": "/writeups/tryhackme/speed-chatting/",
+    "tags": [
+      "tryhackme",
+      "love-at-first-breach",
+      "file-upload",
+      "python",
+      "reverse-shell"
+    ]
+  },
+  {
+    "title": "TryHeartMe",
+    "summary": "An improperly protected JWT lets a normal shopper forge an admin role and redeem the staff-only flag.",
+    "section": "tryhackme",
+    "date": "2026-05-22",
+    "url": "/writeups/tryhackme/tryheartme/",
+    "tags": [
+      "tryhackme",
+      "love-at-first-breach",
+      "jwt",
+      "authorization",
+      "web-security"
+    ]
+  },
+  {
+    "title": "When Hearts Collide",
+    "summary": "A broken MD5-based image matcher can be defeated with a collision to force a successful match.",
+    "section": "tryhackme",
+    "date": "2026-05-27",
+    "url": "/writeups/tryhackme/when-hearts-collide/",
+    "tags": [
+      "tryhackme",
+      "love-at-first-breach",
+      "md5",
+      "hash-collision",
       "cryptography"
+    ]
+  },
+  {
+    "title": "Love Letter Locker",
+    "summary": "An insecure direct object reference exposes another user’s private letter—and the flag—by changing its numeric ID.",
+    "section": "tryhackme",
+    "date": "2026-05-31",
+    "url": "/writeups/tryhackme/love-letter-locker/",
+    "tags": [
+      "tryhackme",
+      "love-at-first-breach",
+      "idor",
+      "access-control",
+      "web-security"
     ]
   }
 ]

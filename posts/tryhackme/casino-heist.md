@@ -1,7 +1,8 @@
 ---
 title: "Casino Heist"
 section: tryhackme
-date: "2026-08-09T01:26:05+05:00"
+date: "2026-08-06"
+order: 5
 summary: "Packet-capture analysis and PyInstaller reverse engineering recover the key used to decrypt exfiltrated jackpot data."
 tags: ["tryhackme", "overflow-the-jackpot", "pcap", "reverse-engineering", "pyinstaller", "forensics"]
 image: "/assets/images/tryhackme/casino-heist/02-protocol-hierarchy.png"

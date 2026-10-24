@@ -1,7 +1,8 @@
 ---
 title: "Corp Website"
 section: tryhackme
-date: "2026-08-17T23:08:12+05:00"
+date: "2026-05-10"
+order: 17
 summary: "CVE-2025-55182 provides remote code execution before a permissive sudo path completes privilege escalation."
 tags: ["tryhackme", "love-at-first-breach", "cve", "rce", "sudo", "privilege-escalation"]
 image: "/assets/images/tryhackme/corp-website/corpweb-banner.png"

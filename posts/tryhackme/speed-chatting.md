@@ -1,7 +1,8 @@
 ---
 title: "Speed Chatting"
 section: tryhackme
-date: "2026-08-13T17:17:41+05:00"
+date: "2026-05-18"
+order: 19
 summary: "An unrestricted profile-image upload accepts executable Python and turns a chat account into a reverse shell."
 tags: ["tryhackme", "love-at-first-breach", "file-upload", "python", "reverse-shell"]
 image: "/assets/images/tryhackme/speed-chatting/banner-speed-chatting.png"

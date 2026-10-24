@@ -1,7 +1,8 @@
 ---
 title: "Eavesdropper"
 section: tryhackme
-date: "2026-08-13T16:16:04+05:00"
+date: "2026-06-21"
+order: 14
 summary: "SSH access as Frank and process monitoring with pspy reveal credentials used for root privilege escalation."
 tags: ["tryhackme", "linux", "pspy", "credential-discovery", "privilege-escalation"]
 image: "/assets/images/tryhackme/eavesdropper/cover.png"

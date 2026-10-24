@@ -1,7 +1,8 @@
 ---
 title: "Lost Fortune Included"
 section: tryhackme
-date: "2026-08-09T21:12:26+05:00"
+date: "2026-08-08"
+order: 3
 summary: "A PHP stream-wrapper bypass defeats the document whitelist and reads arbitrary files from the server."
 tags: ["tryhackme", "overflow-the-jackpot", "php", "file-read", "web-security"]
 image: "/assets/images/tryhackme/lost-fortune-included/04-etc-passwd-arbitrary-read.png"

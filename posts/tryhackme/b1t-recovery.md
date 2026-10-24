@@ -1,7 +1,8 @@
 ---
 title: "B1t Recovery"
 section: tryhackme
-date: "2026-08-09T00:17:32+05:00"
+date: "2026-08-07"
+order: 4
 summary: "Known plaintext from the THM flag prefix recovers a reused four-byte XOR key and decrypts the challenge file."
 tags: ["tryhackme", "overflow-the-jackpot", "xor", "known-plaintext", "cryptography"]
 image: "/assets/images/tryhackme/b1t-recovery/challenge-source.png"

@@ -1,7 +1,8 @@
 ---
 title: "Agent P"
 section: tryhackme
-date: "2026-08-12T14:23:46+05:00"
+date: "2026-08-09"
+order: 2
 summary: "A multi-stage chain moves from WordPress SQL injection through database credentials, unsafe pickle loading, and a signed-task binary to root."
 tags: ["tryhackme", "overflow-the-jackpot", "wordpress", "sql-injection", "pickle", "privilege-escalation"]
 image: "/assets/images/tryhackme/agent-p/01-nmap-scan.png"

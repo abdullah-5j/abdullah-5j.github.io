@@ -1,7 +1,8 @@
 ---
 title: "Fresh Powder"
 section: tryhackme
-date: "2026-08-09T04:01:59+05:00"
+date: "2026-08-06"
+order: 6
 summary: "A detection-as-code investigation repairs five broken Sigma rules and validates each fix against the incident report."
 tags: ["tryhackme", "overflow-the-jackpot", "sigma", "detection-engineering", "blue-team"]
 image: "/assets/images/tryhackme/fresh-powder/01-incident-report.png"

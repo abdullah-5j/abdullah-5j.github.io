@@ -1,7 +1,8 @@
 ---
 title: "Cupid’s Matchmaker"
 section: tryhackme
-date: "2026-08-13T15:50:54+05:00"
+date: "2026-05-03"
+order: 16
 summary: "Stored XSS in a matchmaking survey steals the reviewer’s session cookie and exposes the flag."
 tags: ["tryhackme", "love-at-first-breach", "xss", "cookie-theft", "web-security"]
 image: "/assets/images/tryhackme/cupids-matchmaker/banner-cupid-s-matchmaker.png"

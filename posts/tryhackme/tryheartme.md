@@ -1,7 +1,8 @@
 ---
 title: "TryHeartMe"
 section: tryhackme
-date: "2026-08-13T20:26:03+05:00"
+date: "2026-05-22"
+order: 20
 summary: "An improperly protected JWT lets a normal shopper forge an admin role and redeem the staff-only flag."
 tags: ["tryhackme", "love-at-first-breach", "jwt", "authorization", "web-security"]
 image: "/assets/images/tryhackme/tryheartme/banner-tryheartme.png"

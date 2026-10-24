@@ -1,7 +1,8 @@
 ---
 title: "Umbrella"
 section: tryhackme
-date: "2026-08-13T16:16:44+05:00"
+date: "2026-06-07"
+order: 15
 summary: "An exposed Docker registry leaks database credentials, leading through cracked hashes, command injection, and a privileged container to root."
 tags: ["tryhackme", "docker", "registry", "command-injection", "privilege-escalation"]
 image: "/assets/images/tryhackme/umbrella/app-source-eval.png"

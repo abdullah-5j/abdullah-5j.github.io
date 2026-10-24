@@ -1,7 +1,8 @@
 ---
 title: "Infinity Pool"
 section: tryhackme
-date: "2026-08-13T16:13:41+05:00"
+date: "2026-08-03"
+order: 10
 summary: "Command injection in a legacy network-check endpoint leads through internal services to full compromise."
 tags: ["tryhackme", "byte-lotus", "command-injection", "ssrf", "linux", "privilege-escalation"]
 image: "/assets/images/tryhackme/infinity-pool/02-appjs-source-hint.png"

@@ -1,7 +1,8 @@
 ---
 title: "Beach Bar"
 section: tryhackme
-date: "2026-08-13T16:11:25+05:00"
+date: "2026-08-09"
+order: 7
 summary: "Leaked credentials lead to unsafe YAML deserialization, remote code execution, and Linux privilege escalation."
 tags: ["tryhackme", "byte-lotus", "unsafe-deserialization", "yaml", "linux", "privilege-escalation"]
 image: "/assets/images/tryhackme/beach-bar/dashboard.png"

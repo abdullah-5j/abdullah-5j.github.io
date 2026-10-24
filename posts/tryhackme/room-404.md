@@ -1,7 +1,8 @@
 ---
 title: "Room 404"
 section: tryhackme
-date: "2026-08-13T16:14:11+05:00"
+date: "2026-08-01"
+order: 11
 summary: "An exposed .git directory leaks the staging source and a flag left in the repository."
 tags: ["tryhackme", "byte-lotus", "source-code-disclosure", "git", "web-security"]
 image: "/assets/images/tryhackme/room-404/site-homepage.png"

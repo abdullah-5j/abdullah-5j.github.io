@@ -16,7 +16,7 @@ from urllib.parse import quote
 ROOT = Path(__file__).resolve().parent
 POST_DIR = ROOT / 'posts'
 SITE = 'https://abdullah-5j.github.io'
-ASSET_VERSION = 'verox-20261024-tryhackme'
+ASSET_VERSION = 'verox-20261024-tryhackme-refine'
 SECTIONS = {
     'hackthebox': 'Hack The Box',
     'research': 'Research',
@@ -96,7 +96,7 @@ def sidebar(active):
     ss.append(f'<span id="theme-control-container"><button id="theme-toggle" class="theme-control" aria-label="Choose appearance" aria-expanded="false" title="Appearance">{svg("moon")}</button><span class="theme-menu" id="theme-menu" role="menu"><button type="button" data-theme-choice="light">☀ &nbsp; Light</button><button type="button" data-theme-choice="dark">☾ &nbsp; Dark</button><button type="button" data-theme-choice="system">▣ &nbsp; System</button></span></span>')
     nav=''.join(nav_item(*x[:3],active=(x[3]==active)) for x in links)
     return f'''<aside class="sidebar" id="sidebar">
-    <div class="identity"><a href="/writeups/" aria-label="verox Writeups"><img class="portrait" src="/assets/avatar-king.png?v={ASSET_VERSION}" alt="verox crowned king avatar"/></a><a class="brand" href="/writeups/">verox</a><p class="subtitle">Writeups &amp; Thoughts</p></div>
+    <div class="identity"><a href="/writeups/" aria-label="verox Writeups"><img class="portrait" src="/assets/avatar-king.jpg?v={ASSET_VERSION}" alt="verox crowned king avatar"/></a><a class="brand" href="/writeups/">verox</a><p class="subtitle">Writeups &amp; Thoughts</p></div>
     <nav class="side-nav" aria-label="Primary">{nav}</nav>
     <div class="social-wrap"><div class="social-icons">{''.join(ss)}</div></div><div class="copyright">© 2026 verox</div>
     </aside>'''
@@ -118,7 +118,7 @@ def wrapper(title, active, current, body, posts, description='Cybersecurity writ
     return f'''<!doctype html><html lang="en" data-theme="dark"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="description" content="{h(description)}"/><meta name="theme-color" content="#0c1522"/><meta property="og:site_name" content="verox"/>
     <meta property="og:title" content="{h(title)} | verox"/><meta property="og:description" content="{h(description)}"/>
-    <title>{h(title)} | verox</title><link rel="icon" href="/assets/avatar-king.png?v={ASSET_VERSION}"/><link rel="stylesheet" href="/assets/style.css?v={ASSET_VERSION}"/>
+    <title>{h(title)} | verox</title><link rel="icon" href="/assets/avatar-king.jpg?v={ASSET_VERSION}"/><link rel="stylesheet" href="/assets/style.css?v={ASSET_VERSION}"/>
     <script>try{{const t=localStorage.getItem('verox-theme')||'dark';document.documentElement.dataset.theme=t==='system'?(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'):t}}catch(e){{}}</script></head>
     <body>{sidebar(active)}<div class="shell"><header class="topbar"><div class="crumbs"><button class="mobile-trigger" id="mobile-trigger" aria-label="Toggle menu">{svg('menu')}</button><a href="/writeups/">verox</a><span class="crumb-sep">›</span><span>{h(current)}</span></div><button type="button" class="search-pill" id="open-search" aria-label="Search articles">{svg('search')}Search...</button></header>
     <div class="layout"><main class="main-content" id="main">{body}</main>{rail(posts)}</div>
@@ -175,15 +175,16 @@ def read_posts():
         section_dir='thoughts' if section=='thoughts' else f'writeups/{section}'
         url=f'/{section_dir}/{slug}/'
         short_date=(dt.strftime('%b ') + str(dt.day) + dt.strftime(', %Y')) if dt else ''
-        if dt and ('T' in published or re.search(r'\d{2}:\d{2}',published)):
-            short_date += ' · ' + dt.strftime('%I:%M %p').lstrip('0')
+        try: display_order=int(data.get('order',100000))
+        except (TypeError,ValueError) as ex: raise ValueError(f'{file}: order must be an integer') from ex
         out.append({'title':title,'summary':str(data.get('summary') or '').strip(),'section':section,
                     'date':published,'date_short':short_date,
                     'dt':dt,'url':url,'tags':[str(t).strip().lower() for t in (data.get('tags') or [])],
-                    'image':str(data.get('image') or '').strip(), 'body':body, 'source':str(rel)})
+                    'image':str(data.get('image') or '').strip(), 'body':body, 'source':str(rel),
+                    'order':display_order})
     urls=[p['url'] for p in out]
     if len(urls)!=len(set(urls)):raise ValueError('Duplicate post slugs: rename one of the conflicting Markdown files')
-    return sorted(out,key=lambda p:(p['dt'] or datetime.min,p['title'].lower()),reverse=True)
+    return sorted(out,key=lambda p:(p['order'],-p['dt'].toordinal() if p['dt'] else 0,p['title'].lower()))
 
 
 def article_html(p):
@@ -222,7 +223,6 @@ def build():
     for section in ORDER:
         matches=[p for p in posts if p['section']==section]
         writeups+=link_panel(SECTIONS[section],page_path(section),len(matches))
-        if matches:writeups+=''.join(post_card(p) for p in matches)
     write_file('index.html',wrapper('Writeups','writeups','Writeups',writeups,posts))
     write_file('writeups/index.html',wrapper('Writeups','writeups','Writeups',writeups,posts))
     for section in ORDER:

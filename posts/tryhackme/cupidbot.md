@@ -1,7 +1,8 @@
 ---
 title: "CupidBot"
 section: tryhackme
-date: "2026-08-14T01:34:07+05:00"
+date: "2026-05-14"
+order: 18
 summary: "The bot leaks its verification code, which can be replayed to authorize disclosure of all three challenge flags."
 tags: ["tryhackme", "love-at-first-breach", "chatbot", "information-disclosure", "web-security"]
 image: "/assets/images/tryhackme/cupidbot/banner-cupidbot.png"
