@@ -5,7 +5,8 @@ date: "2026-09-05"
 order: 1
 summary: "A long-form challenge chaining web enumeration, CBC padding-oracle abuse, credential discovery, binary analysis, and buffer overflow exploitation."
 tags: ["tryhackme", "hc0n", "padding-oracle", "reverse-engineering", "buffer-overflow", "privilege-escalation"]
-image: "/assets/images/tryhackme/hc0n-christmas-ctf/room.png"
+image: "/assets/images/tryhackme/hc0n-christmas-ctf/cover-provided.jpg"
+image_fit: cover
 ---
 Room: https://tryhackme.com/room/hc0nchristmasctf
 

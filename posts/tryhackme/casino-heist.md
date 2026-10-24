@@ -5,7 +5,9 @@ date: "2026-08-06"
 order: 5
 summary: "Packet-capture analysis and PyInstaller reverse engineering recover the key used to decrypt exfiltrated jackpot data."
 tags: ["tryhackme", "overflow-the-jackpot", "pcap", "reverse-engineering", "pyinstaller", "forensics"]
-image: "/assets/images/tryhackme/casino-heist/02-protocol-hierarchy.png"
+image: "/assets/images/tryhackme/overflow-the-jackpot-cover.png"
+image_fit: contain
+event: "THM DEFCON CTF Event"
 ---
 Machine got flagged for acting weird late at night, and someone pulled the full packet capture before killing it.
 

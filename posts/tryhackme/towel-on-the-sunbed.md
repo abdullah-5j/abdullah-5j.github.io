@@ -5,7 +5,8 @@ date: "2026-07-27"
 order: 13
 summary: "A race condition lets parallel reward claims bypass the 24-hour lock and open the Whale Vault."
 tags: ["tryhackme", "byte-lotus", "race-condition", "web-security"]
-image: "/assets/images/tryhackme/towel-on-the-sunbed/dashboard-fresh.png"
+image: "/assets/images/tryhackme/towel-on-the-sunbed/cover-provided.png"
+image_fit: contain
 ---
 **Category:** Web · Race Condition
 

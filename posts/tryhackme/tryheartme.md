@@ -5,7 +5,8 @@ date: "2026-05-22"
 order: 20
 summary: "An improperly protected JWT lets a normal shopper forge an admin role and redeem the staff-only flag."
 tags: ["tryhackme", "love-at-first-breach", "jwt", "authorization", "web-security"]
-image: "/assets/images/tryhackme/tryheartme/banner-tryheartme.png"
+image: "/assets/images/tryhackme/tryheartme/cover-provided.png"
+image_fit: contain
 ---
 **Room:** [Love at First Breach 2026 – TryHeartMe](https://tryhackme.com/room/lafb2026e5)
 

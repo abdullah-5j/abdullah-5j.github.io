@@ -5,7 +5,9 @@ date: "2026-08-06"
 order: 6
 summary: "A detection-as-code investigation repairs five broken Sigma rules and validates each fix against the incident report."
 tags: ["tryhackme", "overflow-the-jackpot", "sigma", "detection-engineering", "blue-team"]
-image: "/assets/images/tryhackme/fresh-powder/01-incident-report.png"
+image: "/assets/images/tryhackme/overflow-the-jackpot-cover.png"
+image_fit: contain
+event: "THM DEFCON CTF Event"
 ---
 This challenge was a Detection-as-Code style task. Instead of exploiting a machine, I had to read the incident report, understand the attack chain, fix broken Sigma rules in pull requests, run the CI checks, and merge the rules when everything passed.
 

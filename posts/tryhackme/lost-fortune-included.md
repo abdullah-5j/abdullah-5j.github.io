@@ -5,7 +5,9 @@ date: "2026-08-08"
 order: 3
 summary: "A PHP stream-wrapper bypass defeats the document whitelist and reads arbitrary files from the server."
 tags: ["tryhackme", "overflow-the-jackpot", "php", "file-read", "web-security"]
-image: "/assets/images/tryhackme/lost-fortune-included/04-etc-passwd-arbitrary-read.png"
+image: "/assets/images/tryhackme/overflow-the-jackpot-cover.png"
+image_fit: contain
+event: "THM DEFCON CTF Event"
 ---
 Easy web box, target was `10.113.146.22`. Started with a full port scan to see what's actually running.
 

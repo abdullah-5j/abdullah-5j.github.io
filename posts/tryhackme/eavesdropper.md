@@ -6,6 +6,7 @@ order: 14
 summary: "SSH access as Frank and process monitoring with pspy reveal credentials used for root privilege escalation."
 tags: ["tryhackme", "linux", "pspy", "credential-discovery", "privilege-escalation"]
 image: "/assets/images/tryhackme/eavesdropper/cover.png"
+image_fit: contain
 ---
 > Listen closely, you might hear a password!
 

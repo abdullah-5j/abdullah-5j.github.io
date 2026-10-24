@@ -5,7 +5,8 @@ date: "2026-08-01"
 order: 11
 summary: "An exposed .git directory leaks the staging source and a flag left in the repository."
 tags: ["tryhackme", "byte-lotus", "source-code-disclosure", "git", "web-security"]
-image: "/assets/images/tryhackme/room-404/site-homepage.png"
+image: "/assets/images/tryhackme/room-404/cover-provided.jpg"
+image_fit: contain
 ---
 **Category:** Web
 

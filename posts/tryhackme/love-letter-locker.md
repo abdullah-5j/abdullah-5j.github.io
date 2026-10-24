@@ -5,7 +5,8 @@ date: "2026-05-31"
 order: 22
 summary: "An insecure direct object reference exposes another user’s private letter—and the flag—by changing its numeric ID."
 tags: ["tryhackme", "love-at-first-breach", "idor", "access-control", "web-security"]
-image: "/assets/images/tryhackme/love-letter-locker/banner-love-letter-locker.png"
+image: "/assets/images/tryhackme/love-letter-locker/cover-provided.png"
+image_fit: contain
 ---
 **Room:** [Love at First Breach 2026 – Love Letter Locker](https://tryhackme.com/room/lafb2026e2)
 

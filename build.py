@@ -16,7 +16,7 @@ from urllib.parse import quote
 ROOT = Path(__file__).resolve().parent
 POST_DIR = ROOT / 'posts'
 SITE = 'https://abdullah-5j.github.io'
-ASSET_VERSION = 'verox-20261024-tryhackme-refine'
+ASSET_VERSION = 'verox-20261024-chirpy-frame'
 SECTIONS = {
     'hackthebox': 'Hack The Box',
     'research': 'Research',
@@ -138,8 +138,10 @@ def link_panel(label, url, count=None):
 
 def post_card(p):
     dt=f'<span>{svg("calendar",15)} {h(p["date_short"])}</span>' if p['date_short'] else ''
-    meta=f'<div class="post-card-meta">{dt}<span>{svg("folder",15)} {h(SECTIONS[p["section"]])}</span></div>'
-    image=f'<img class="post-thumb" src="{h(p["image"])}" alt="" loading="lazy"/>' if p.get('image') else ''
+    event=f'<span class="post-event">{h(p["event"])}</span>' if p.get('event') else ''
+    meta=f'<div class="post-card-meta">{dt}<span>{svg("folder",15)} {h(SECTIONS[p["section"]])}</span>{event}</div>'
+    fit=' contain' if p.get('image_fit') == 'contain' else ''
+    image=f'<img class="post-thumb{fit}" src="{h(p["image"])}" alt="{h(p["title"])} artwork" loading="lazy"/>' if p.get('image') else ''
     return f'<article class="post-card{"" if image else " no-thumb"}"><div class="post-card-body"><h3 class="post-card-title"><a href="{h(p["url"])}">{h(p["title"])}</a></h3><p class="post-card-desc">{h(p["summary"])}</p>{meta}</div>{image}</article>'
 
 
@@ -177,10 +179,14 @@ def read_posts():
         short_date=(dt.strftime('%b ') + str(dt.day) + dt.strftime(', %Y')) if dt else ''
         try: display_order=int(data.get('order',100000))
         except (TypeError,ValueError) as ex: raise ValueError(f'{file}: order must be an integer') from ex
+        image_fit=str(data.get('image_fit') or 'cover').strip().lower()
+        if image_fit not in ('cover','contain'):
+            raise ValueError(f'{file}: image_fit must be cover or contain')
         out.append({'title':title,'summary':str(data.get('summary') or '').strip(),'section':section,
                     'date':published,'date_short':short_date,
                     'dt':dt,'url':url,'tags':[str(t).strip().lower() for t in (data.get('tags') or [])],
-                    'image':str(data.get('image') or '').strip(), 'body':body, 'source':str(rel),
+                    'image':str(data.get('image') or '').strip(), 'image_fit':image_fit,
+                    'event':str(data.get('event') or '').strip(), 'body':body, 'source':str(rel),
                     'order':display_order})
     urls=[p['url'] for p in out]
     if len(urls)!=len(set(urls)):raise ValueError('Duplicate post slugs: rename one of the conflicting Markdown files')
@@ -195,6 +201,7 @@ def article_html(p):
     # headings automatically become anchor links for a future table of contents
     body=re.sub(r'<h([2-3])>(.*?)</h\1>',lambda m:f'<h{m.group(1)} id="{h("-".join(re.findall(r"[a-z0-9]+",re.sub("<[^>]+>","",m.group(2)).lower())))}">{m.group(2)}</h{m.group(1)}>',body)
     meta=(p['date_short']+' · ' if p['date_short'] else '')+SECTIONS[p['section']]
+    if p.get('event'): meta += ' · '+p['event']
     return f'<article class="article"><div class="heading-block"><h1>{h(p["title"])}</h1><div class="article-meta">{h(meta)}</div></div><div class="article-body">{body}</div></article>'
 
 

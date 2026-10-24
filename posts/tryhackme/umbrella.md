@@ -5,7 +5,8 @@ date: "2026-06-07"
 order: 15
 summary: "An exposed Docker registry leaks database credentials, leading through cracked hashes, command injection, and a privileged container to root."
 tags: ["tryhackme", "docker", "registry", "command-injection", "privilege-escalation"]
-image: "/assets/images/tryhackme/umbrella/app-source-eval.png"
+image: "/assets/images/tryhackme/umbrella/cover-provided.png"
+image_fit: contain
 ---
 **Category:** Boot2Root · **Difficulty:** Medium
 

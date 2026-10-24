@@ -5,7 +5,9 @@ date: "2026-08-09"
 order: 2
 summary: "A multi-stage chain moves from WordPress SQL injection through database credentials, unsafe pickle loading, and a signed-task binary to root."
 tags: ["tryhackme", "overflow-the-jackpot", "wordpress", "sql-injection", "pickle", "privilege-escalation"]
-image: "/assets/images/tryhackme/agent-p/01-nmap-scan.png"
+image: "/assets/images/tryhackme/overflow-the-jackpot-cover.png"
+image_fit: contain
+event: "THM DEFCON CTF Event"
 ---
 Room link: https://tryhackme.com/room/thm-ctf-jackpot-overflow
 

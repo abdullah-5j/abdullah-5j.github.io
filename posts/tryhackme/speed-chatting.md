@@ -5,7 +5,8 @@ date: "2026-05-18"
 order: 19
 summary: "An unrestricted profile-image upload accepts executable Python and turns a chat account into a reverse shell."
 tags: ["tryhackme", "love-at-first-breach", "file-upload", "python", "reverse-shell"]
-image: "/assets/images/tryhackme/speed-chatting/banner-speed-chatting.png"
+image: "/assets/images/tryhackme/speed-chatting/cover-provided.png"
+image_fit: cover
 ---
 **Room:** [Love at First Breach 2026 – Speed Chatting](https://tryhackme.com/room/lafb2026e4)
 

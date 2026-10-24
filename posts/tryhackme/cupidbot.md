@@ -5,7 +5,8 @@ date: "2026-05-14"
 order: 18
 summary: "The bot leaks its verification code, which can be replayed to authorize disclosure of all three challenge flags."
 tags: ["tryhackme", "love-at-first-breach", "chatbot", "information-disclosure", "web-security"]
-image: "/assets/images/tryhackme/cupidbot/banner-cupidbot.png"
+image: "/assets/images/tryhackme/cupidbot/cover-provided.png"
+image_fit: contain
 ---
 **Room:** [Love at First Breach 2026 – CupidBot](https://tryhackme.com/room/lafb2026e6)
 

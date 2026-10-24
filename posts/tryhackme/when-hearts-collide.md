@@ -5,7 +5,8 @@ date: "2026-05-27"
 order: 21
 summary: "A broken MD5-based image matcher can be defeated with a collision to force a successful match."
 tags: ["tryhackme", "love-at-first-breach", "md5", "hash-collision", "cryptography"]
-image: "/assets/images/tryhackme/when-hearts-collide/banner-when-hearts-collide.png"
+image: "/assets/images/tryhackme/when-hearts-collide/cover-provided.png"
+image_fit: contain
 ---
 **Room:** [Love at First Breach 2026 – When Hearts Collide](https://tryhackme.com/room/lafb2026e1)
 

@@ -5,7 +5,8 @@ date: "2026-05-03"
 order: 16
 summary: "Stored XSS in a matchmaking survey steals the reviewer’s session cookie and exposes the flag."
 tags: ["tryhackme", "love-at-first-breach", "xss", "cookie-theft", "web-security"]
-image: "/assets/images/tryhackme/cupids-matchmaker/banner-cupid-s-matchmaker.png"
+image: "/assets/images/tryhackme/cupids-matchmaker/cover-provided.png"
+image_fit: contain
 ---
 **Room:** [Love at First Breach 2026 – Cupid's Matchmaker](https://tryhackme.com/room/lafb2026e3)
 

@@ -5,7 +5,9 @@ date: "2026-08-07"
 order: 4
 summary: "Known plaintext from the THM flag prefix recovers a reused four-byte XOR key and decrypts the challenge file."
 tags: ["tryhackme", "overflow-the-jackpot", "xor", "known-plaintext", "cryptography"]
-image: "/assets/images/tryhackme/b1t-recovery/challenge-source.png"
+image: "/assets/images/tryhackme/overflow-the-jackpot-cover.png"
+image_fit: contain
+event: "THM DEFCON CTF Event"
 ---
 I first checked the provided Python file to see how the flag was encrypted.
 
