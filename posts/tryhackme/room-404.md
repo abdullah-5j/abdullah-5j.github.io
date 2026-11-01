@@ -5,7 +5,7 @@ date: "2026-08-01"
 order: 11
 summary: "An exposed .git directory leaks the staging source and a flag left in the repository."
 tags: ["tryhackme", "byte-lotus", "source-code-disclosure", "git", "web-security"]
-image: "/assets/images/tryhackme/room-404/cover-provided.jpg"
+image: "/assets/images/tryhackme/room-404/cover-provided.webp"
 image_fit: contain
 ---
 Briefing was pretty on the nose about it too something about a room "not on the floor plan" on port 8080, and a night-shift dev who shipped more than the website. Objective was just to dump the exposed source and grab the flag.
