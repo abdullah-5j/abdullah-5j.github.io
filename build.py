@@ -18,7 +18,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 POST_DIR = ROOT / 'posts'
 SITE = 'https://abdullah-5j.github.io'
-ASSET_VERSION = 'verox-20261101-social-32'
+ASSET_VERSION = 'verox-20261102-thoughts-crta'
 SECTIONS = {
     'hackthebox': 'Hack The Box',
     'research': 'Research',
@@ -313,7 +313,7 @@ def article_html(p, posts):
     if newer: nav_bits.append(f'<a class="post-nav-link newer" href="{h(newer["url"])}"><small>Newer</small><span>{h(newer["title"])}</span></a>')
     post_nav=f'<nav class="post-navigation" aria-label="Post navigation">{"".join(nav_bits)}</nav>' if nav_bits else ''
     cover_html=''
-    if p.get('image'):
+    if p.get('image') and p.get('section') != 'thoughts':
         cover_classes=['article-cover']
         if p.get('image_fit')=='contain': cover_classes.append('contain')
         if p.get('image_background')=='black': cover_classes.append('black')
