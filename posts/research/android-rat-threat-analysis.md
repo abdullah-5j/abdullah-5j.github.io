@@ -5,7 +5,7 @@ date: "2025-11-12"
 order: 1
 summary: "An isolated-lab analysis of AhMyth and the risks of trojanized Android apps, sensitive permissions, and command-and-control access."
 tags: ["android", "malware-analysis", "mobile-security", "threat-analysis", "defensive-security"]
-image: "/assets/images/research/android-rat-threat/android-evil.jpeg"
+image: "/assets/images/research/android-rat-threat/android-evil.png"
 image_fit: contain
 ---
 
@@ -17,9 +17,42 @@ The project reviewed the RAT's attacker console and Android component at a high 
 
 The tested sample used a legitimate camera application as its apparent host. This illustrates a key social-engineering risk: familiar branding and expected permission prompts can make a modified app seem trustworthy.
 
+![Trojanized LibreCamera on the Android test device](/assets/images/research/android-rat-threat/librecamera.png)
+
+## Lab environment
+
+The analysis was carried out entirely on isolated virtual machines. No personal devices, networks, or third-party services were used.
+
+| Component | Detail |
+|---|---|
+| Attacker host | Kali Linux (VMware) |
+| Victim device | Android 9 (64-bit) via MEmu Play |
+| RAT tool | AhMyth v1.0-beta.5a |
+| Runtime dependency | OpenJDK 11 |
+| Carrier application | LibreCamera (open-source) |
+
+AhMyth requires Java 11, while recent Kali builds default to a newer JDK. Installing OpenJDK 11 and switching the active default resolved the runtime conflict before the console would launch.
+
+![Selecting OpenJDK 11 as the active Java runtime](/assets/images/research/android-rat-threat/java-switch.png)
+
+The APK Builder was then used to decompile the carrier application, inject the payload classes, and rebuild the signed artifact. The resulting file looks and installs like a normal camera app while carrying the RAT.
+
+![AhMyth APK Builder binding the payload to the carrier app](/assets/images/research/android-rat-threat/apk-builder.png)
+
 ## What the analysis observed
 
-After the Android app connected to the lab console, the interface exposed functions associated with sensitive device data and hardware, including contacts, messages, call history, files, camera, microphone, location, and remote commands. The breadth of access demonstrates why installing an untrusted app can put much more than the app's own data at risk.
+After the Android app connected to the lab console, the interface exposed functions associated with sensitive device data and hardware. The breadth of access demonstrates why installing an untrusted app can put much more than the app's own data at risk.
+
+| Capability | Impact |
+|---|---|
+| Camera | Silent photos from front and rear cameras |
+| Microphone | Ambient audio recording |
+| Location | Live GPS tracking |
+| File manager | Browse and exfiltrate stored files |
+| SMS | Read messages, including possible one-time codes |
+| Call logs | Full call history |
+| Contacts | Address-book harvesting |
+| Remote commands | Arbitrary command execution |
 
 The test also observed that the selected launch configuration did not remain connected after the app was uninstalled. This is a result from this specific lab setup; persistence behavior can differ across configurations and samples.
 
