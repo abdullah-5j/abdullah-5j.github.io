@@ -18,7 +18,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 POST_DIR = ROOT / 'posts'
 SITE = 'https://abdullah-5j.github.io'
-ASSET_VERSION = 'verox-20261102-thoughts-crta'
+ASSET_VERSION = 'verox-20261102-thoughts-styling'
 SECTIONS = {
     'hackthebox': 'Hack The Box',
     'research': 'Research',
@@ -206,7 +206,8 @@ def post_card(p):
     fit=' contain' if p.get('image_fit') == 'contain' else ''
     background=' black' if p.get('image_background') == 'black' else ''
     image=f'<img class="post-thumb{fit}{background}" src="{h(p["image"])}" alt="{h(p["title"])} artwork" loading="lazy"/>' if p.get('image') else ''
-    return f'<article class="post-card{"" if image else " no-thumb"}"><div class="post-card-body"><h3 class="post-card-title"><a href="{h(p["url"])}">{h(p["title"])}</a></h3><p class="post-card-desc">{h(p["summary"])}</p>{meta}</div>{image}</article>'
+    edge=' edge' if p['section'] == 'thoughts' else ''
+    return f'<article class="post-card{edge}{"" if image else " no-thumb"}"><div class="post-card-body"><h3 class="post-card-title"><a href="{h(p["url"])}">{h(p["title"])}</a></h3><p class="post-card-desc">{h(p["summary"])}</p>{meta}</div>{image}</article>'
 
 
 def read_posts():
@@ -318,7 +319,8 @@ def article_html(p, posts):
         if p.get('image_fit')=='contain': cover_classes.append('contain')
         if p.get('image_background')=='black': cover_classes.append('black')
         cover_html=f'<img class="{" ".join(cover_classes)}" src="{h(p["image"])}" alt="{h(p["title"])} cover" loading="lazy"/>'
-    article=f'''<article class="article"><div class="heading-block"><h1>{h(p["title"])}</h1><div class="article-meta">{'<span>·</span>'.join(meta)}</div></div>{cover_html}
+    section_class=f' article--{p["section"]}'
+    article=f'''<article class="article{section_class}"><div class="heading-block"><h1>{h(p["title"])}</h1><div class="article-meta">{'<span>·</span>'.join(meta)}</div></div>{cover_html}
     <div class="article-body">{body}</div><footer class="post-tail"><div class="post-taxonomy"><a class="post-category" href="{page_path(p['section'])}">{h(category)}</a><div class="post-tags">{tags}</div></div></footer></article>{related_section}{post_nav}'''
     return article,toc_html
 

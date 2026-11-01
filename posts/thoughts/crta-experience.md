@@ -6,7 +6,7 @@ order: 1
 summary: "Passing the Certified Red Team Analyst exam felt like an advanced TryHackMe room — a year of practice mattered more than the course."
 tags: ["crta", "red-team", "penetration-testing", "active-directory", "cybersecurity"]
 image: "/assets/images/thoughts/crta-experience/crta-badge.png"
-image_fit: contain
+image_fit: cover
 ---
 I passed the Certified Red Team Analyst (CRTA) exam by CyberWarFare Labs on October 25, 2026. It cost me $9 with a 90% discount, down from the regular $99.
 
@@ -54,3 +54,5 @@ Finding vulnerabilities is only half the job. If you cannot explain what you did
 My next targets are CJCA, PNPT, CPTS and CRTO, in that order. After I finish all of them, I will go for OSCP. I will also start job hunting along the way.
 
 If you are preparing for CRTA, feel free to connect or ask me about my experience.
+
+![CRTA certificate issued to Muhammad Abdullah by CyberWarFare Labs](/assets/images/thoughts/crta-experience/crta-certificate.webp)
