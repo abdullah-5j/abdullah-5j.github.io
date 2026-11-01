@@ -68,11 +68,11 @@ def git_updated(rel, fallback):
 
 def svg(name, size=19):
     paths = {
-        'feather': '<path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L3 12.5V21h8.5z"/><path d="m16 8-2 2"/><path d="M3 21l9-9"/>',
-        'brain': '<path d="M12 18V5a3 3 0 0 0-5.5-1.6A4 4 0 0 0 4 10a4 4 0 0 0 2 7 4 4 0 0 0 6 1"/><path d="M12 18V5a3 3 0 0 1 5.5-1.6A4 4 0 0 1 20 10a4 4 0 0 1-2 7 4 4 0 0 1-6 1"/><path d="M9 9c-2 0-3 1-3 3m9-3c2 0 3 1 3 3"/>',
-        'archive': '<rect x="3" y="4" width="18" height="4" rx="1"/><path d="M5 8v12h14V8M10 12h4"/>',
-        'list': '<path d="M4 6h16M4 12h16M4 18h16"/>',
-        'tag': '<path d="M20 12l-8 8-9-9V4h7z"/><circle cx="7.5" cy="8" r="1"/>',
+        'feather': '<path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L3 12.5V21h8.5z" fill="currentColor" fill-opacity="0.2"/><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L3 12.5V21h8.5z"/><path d="m16 8-2 2"/><path d="M3 21l9-9"/>',
+        'brain': '<path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z" fill="currentColor" fill-opacity="0.2"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z" fill="currentColor" fill-opacity="0.2"/><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/>',
+        'archive': '<rect x="3" y="4" width="18" height="4" rx="1" fill="currentColor" fill-opacity="0.2"/><rect x="3" y="4" width="18" height="4" rx="1"/><path d="M5 8v12h14V8"/><path d="M10 12h4"/>',
+        'list': '<circle cx="5" cy="6" r="1.3" fill="currentColor" stroke="none"/><circle cx="5" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="5" cy="18" r="1.3" fill="currentColor" stroke="none"/><path d="M9 6h12M9 12h12M9 18h12"/>',
+        'tag': '<path d="M20 12l-8 8-9-9V4h7z" fill="currentColor" fill-opacity="0.2"/><path d="M20 12l-8 8-9-9V4h7z"/><circle cx="7.5" cy="7.5" r="1.2" fill="currentColor" stroke="none"/>',
         'folder': '<path d="M3 7V5a2 2 0 0 1 2-2h5l2 3h7a2 2 0 0 1 2 2v11H3z"/>',
         'chevron': '<path d="m9 18 6-6-6-6"/>',
         'search': '<circle cx="10.7" cy="10.7" r="7.5"/><path d="m16.5 16.5 4.6 4.6"/>',
@@ -89,7 +89,7 @@ def svg(name, size=19):
         'medium': '<circle cx="5.5" cy="12" r="4.6" fill="currentColor" stroke="none"/><ellipse cx="15.5" cy="12" rx="2.7" ry="4.4" fill="currentColor" stroke="none"/><ellipse cx="21" cy="12" rx="1.2" ry="4.1" fill="currentColor" stroke="none"/>',
         'rss': '<path d="M4 11a9 9 0 0 1 9 9M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1" fill="currentColor" stroke="none"/>',
     }
-    return f'<svg viewBox="0 0 24 24" width="{size}" height="{size}" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{paths[name]}</svg>'
+    return f'<svg viewBox="0 0 24 24" width="{size}" height="{size}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{paths[name]}</svg>'
 
 
 def page_path(section):
