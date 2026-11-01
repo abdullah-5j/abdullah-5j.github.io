@@ -129,7 +129,7 @@ def sidebar(active):
     return f'''<aside class="sidebar" id="sidebar">
     <div class="identity"><a href="/writeups/" aria-label="verox Writeups"><img class="portrait" src="/assets/avatar-king.jpg?v={ASSET_VERSION}" alt="verox crowned king avatar"/></a><a class="brand" href="/writeups/">verox</a><p class="subtitle">Writeups &amp; Thoughts</p></div>
     <nav class="side-nav" aria-label="Primary">{nav}</nav>
-    <div class="social-wrap"><div class="social-icons">{''.join(ss)}</div></div><div class="copyright">© 2026 verox</div>
+    <div class="social-wrap"><div class="social-icons">{''.join(ss)}</div></div>
     </aside>'''
 
 
