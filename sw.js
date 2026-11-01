@@ -1,5 +1,5 @@
-const CACHE='verox-20261024-full-features';
-const CORE=['/','/writeups/','/archives/','/categories/','/tags/','/site.json','/assets/style.css?v=verox-20261024-full-features','/assets/app.js?v=verox-20261024-full-features','/assets/site-icon.svg?v=verox-20261024-full-features'];
+const CACHE='verox-20261101-article-cover';
+const CORE=['/','/writeups/','/archives/','/categories/','/tags/','/site.json','/assets/style.css?v=verox-20261101-article-cover','/assets/app.js?v=verox-20261101-article-cover','/assets/site-icon.svg?v=verox-20261101-article-cover'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(CORE))));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
 self.addEventListener('message',event=>{if(event.data==='SKIP_WAITING')self.skipWaiting()});
