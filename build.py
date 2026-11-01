@@ -115,7 +115,6 @@ def sidebar(active):
         ('Medium','medium','https://medium.com/@abdullah5j009'),
         ('TryHackMe','target','https://tryhackme.com/p/Verox.'),
         ('Hack The Box','cube','https://app.hackthebox.com/users/2654143'),
-        ('RSS','rss','/feed.xml'),
         ('Discord','discord','https://discord.com/users/@me'),
     ]
     ss = []
