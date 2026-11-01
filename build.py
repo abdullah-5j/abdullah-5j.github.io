@@ -18,7 +18,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 POST_DIR = ROOT / 'posts'
 SITE = 'https://abdullah-5j.github.io'
-ASSET_VERSION = 'verox-20261101-timeline-compact'
+ASSET_VERSION = 'verox-20261101-small-social'
 SECTIONS = {
     'hackthebox': 'Hack The Box',
     'research': 'Research',
