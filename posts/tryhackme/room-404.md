@@ -8,8 +8,6 @@ tags: ["tryhackme", "byte-lotus", "source-code-disclosure", "git", "web-security
 image: "/assets/images/tryhackme/room-404/cover-provided.jpg"
 image_fit: contain
 ---
-**Category:** Web
-
 Briefing was pretty on the nose about it too something about a room "not on the floor plan" on port 8080, and a night-shift dev who shipped more than the website. Objective was just to dump the exposed source and grab the flag.
 
 

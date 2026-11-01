@@ -8,8 +8,6 @@ tags: ["tryhackme", "byte-lotus", "unsafe-deserialization", "yaml", "linux", "pr
 image: "/assets/images/tryhackme/beach-bar/beach-bar-cover-v2.png"
 image_fit: contain
 ---
-**Tags:** `flask` `pyyaml-deserialization` `rce` `credential-reuse` `linux`
-
 The beach bar's jukebox takes song requests from anyone with a phone. The briefing hints at three things a DJ who never logs out, a queue that accepts more than song titles, and a service quietly announcing "something" and each one turns out to be a real finding on the box.
 
 ---

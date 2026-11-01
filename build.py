@@ -312,7 +312,13 @@ def article_html(p, posts):
     if older: nav_bits.append(f'<a class="post-nav-link older" href="{h(older["url"])}"><small>Older</small><span>{h(older["title"])}</span></a>')
     if newer: nav_bits.append(f'<a class="post-nav-link newer" href="{h(newer["url"])}"><small>Newer</small><span>{h(newer["title"])}</span></a>')
     post_nav=f'<nav class="post-navigation" aria-label="Post navigation">{"".join(nav_bits)}</nav>' if nav_bits else ''
-    article=f'''<article class="article"><div class="heading-block"><h1>{h(p["title"])}</h1><div class="article-meta">{'<span>·</span>'.join(meta)}</div></div>
+    cover_html=''
+    if p.get('image'):
+        cover_classes=['article-cover']
+        if p.get('image_fit')=='contain': cover_classes.append('contain')
+        if p.get('image_background')=='black': cover_classes.append('black')
+        cover_html=f'<img class="{" ".join(cover_classes)}" src="{h(p["image"])}" alt="{h(p["title"])} cover" loading="lazy"/>'
+    article=f'''<article class="article"><div class="heading-block"><h1>{h(p["title"])}</h1><div class="article-meta">{'<span>·</span>'.join(meta)}</div></div>{cover_html}
     <div class="article-body">{body}</div><footer class="post-tail"><div class="post-taxonomy"><a class="post-category" href="{page_path(p['section'])}">{h(category)}</a><div class="post-tags">{tags}</div></div></footer></article>{related_section}{post_nav}'''
     return article,toc_html
 

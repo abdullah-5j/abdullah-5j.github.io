@@ -8,9 +8,6 @@ tags: ["tryhackme", "byte-lotus", "race-condition", "web-security"]
 image: "/assets/images/tryhackme/towel-on-the-sunbed/cover-provided.png"
 image_fit: contain
 ---
-**Category:** Web · Race Condition
-
-
 Ponzi is a poolside crypto rewards app. You get 50 PONZI every 24 hours by claiming a staking reward, and once you hit 150 PONZI you become a Whale and the Whale Vault opens up with the flag.
 
 ## Recon
